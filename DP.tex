@@ -8,7 +8,7 @@
 % upravil Martin Zajíc
 % šablona je upravena aby šla bez problému přeložit pomocí TeXlive a překladače XeLaTeX
 % XeLaTex také řeší neduhy spojené s kódováním českých znaků a jejich kopírování z PDF dokumnetu
-\documentclass[a4paper,12pt]{article}
+\documentclass[a4paper,12pt,twoside,BCOR=10mm]{article}
 \usepackage{xltxtra}
 \usepackage[czech]{babel}
 \usepackage{listings}
@@ -76,146 +76,146 @@
 
 % ****************** NASTAVENÍ PÍSMA, ODSTAVCE, ROVNIC, POZNÁMEK **************
 \parindent=0em
-\def\thefootnote{\arabic{footnote})}	% poznámka pod čarou se závorkou
+\def\thefootnote{\arabic{footnote})}  % poznámka pod čarou se závorkou
 \onehalfspacing % nastavím řádkování tímto způsobem nebo \renewcommand{\baselinestretch}{1.5} ??
-\setlength{\parskip}{3pt}		% vertikální mezera mezi nadpisy
-% *************************** NASTAVENÍ ČÍTAČŮ	 ********************************
+\setlength{\parskip}{3pt}   % vertikální mezera mezi nadpisy
+% *************************** NASTAVENÍ ČÍTAČŮ   ********************************
 \setcounter{tocdepth}{3} % do obsahu se ukládají pouze první dvě úrovně kapitol
 
 % *************************** UŽIVATELSKÉ STYLY *******************************
 \newcommand{\nn}[1]{\clearpage\section*{\texorpdfstring{\uppercase{#1}}{#1}}\addcontentsline{toc}{section}{\uppercase{#1}}}% styl nn = nečíslovaný nadpis (je vysázený v obsahu)
-\newcommand{\nm}[1]{\clearpage\section*{\uppercase{#1}}}	% definujeme styl nm = nečíslovaný nadpis (není vysázený v obsahu)
+\newcommand{\nm}[1]{\clearpage\section*{\uppercase{#1}}}  % definujeme styl nm = nečíslovaný nadpis (není vysázený v obsahu)
 \newcommand{\nmm}[1]{\section*{#1}} % definujeme styl nmm = nečíslovaný nadpis (není vysázený v obsahu) malými písmeny bez clearpage
-\newcommand{\nns}[1]{\section*{\uppercase{#1}}}		% definujeme styl ns = nečíslovaný nadpis na stejné stránce (není vysázený v obsahu)
-\newcommand{\sectionV}[1]{\section{\uppercase{#1}}}	%nadpis1 (section) velkým
+\newcommand{\nns}[1]{\section*{\uppercase{#1}}}   % definujeme styl ns = nečíslovaný nadpis na stejné stránce (není vysázený v obsahu)
+\newcommand{\sectionV}[1]{\section{\uppercase{#1}}} %nadpis1 (section) velkým
 %\renewcommand{\section}[1]{\section{\uppercase{#1}}}
 \newcommand{\upc}[1]{\uppercase{#1}} %zjednodušení pro velká písmena
 \newcommand{\odkazNaKapitolu}[1]{(viz.~kapitola~\ref{#1}/s\pageref{#1})}
 \newcommand{\odkazNaObrazek}[1]{(viz.~obr.~\ref{#1}/s\pageref{#1})}
 
 \newcommand{\nadpis}[1]{%nadpis pod kterym je vertikalni mezera
-	\vspace{4 mm}
-	\textbf{#1}\\
-	\vspace{4 mm}
-	}
+  \vspace{4 mm}
+  \textbf{#1}\\
+  \vspace{4 mm}
+  }
 
 \newcommand{\obr}[3]{% styl \obr pro obrázky
-	\begin{figure}[h]
-	\center\includegraphics[scale=#2]{#1}
-	\caption{#3}
-	\end{figure}
-	}
+  \begin{figure}[h]
+  \center\includegraphics[scale=#2]{#1}
+  \caption{#3}
+  \end{figure}
+  }
 
 \newcommand{\ofZadani}[2]{% styl \obr pro obrázky
-	\begin{figure}[h]
-	\center\includegraphics[width=500pt,height=700pt]{#1}
-	%\caption{#2}
-	\end{figure}
-	}
+  \begin{figure}[h]
+  \center\includegraphics[width=500pt,height=700pt]{#1}
+  %\caption{#2}
+  \end{figure}
+  }
 
 \newcommand{\tab}[3]{% styl \tab pro tabulky
-	\begin{table}[h]
-	\caption{#1}
-	\begin{center}
-	\begin{tabular}{#2}
-	#3
-	\end{tabular}
-	\end{center}
-	\end{table}
-	}
+  \begin{table}[h]
+  \caption{#1}
+  \begin{center}
+  \begin{tabular}{#2}
+  #3
+  \end{tabular}
+  \end{center}
+  \end{table}
+  }
 
 \newcommand{\tabpri}[3]{% styl \tabpri pro tabulky v příloze
-	\begin{table}[h]
-	\begin{center}
-	#1
-	\end{center}
-	\begin{center}
-	\begin{tabular}{#2}
-	#3
-	\end{tabular}
-	\end{center}
-	\end{table}
-	}
+  \begin{table}[h]
+  \begin{center}
+  #1
+  \end{center}
+  \begin{center}
+  \begin{tabular}{#2}
+  #3
+  \end{tabular}
+  \end{center}
+  \end{table}
+  }
 
 \newcommand{\rov}[2][chybějici rovnice]{% styl \rov pro rovnice
-	\begin{equation}
-	#2
-	\label{#1}
-	\end{equation}
-	}
-	
+  \begin{equation}
+  #2
+  \label{#1}
+  \end{equation}
+  }
+  
 \newcommand{\seznamobr}{% příkaz \seznamobr pro vysázení seznamu obrázků
-	\addcontentsline{toc}{section}{\listfigurename}
-	\clearpage
-	\listoffigures
-	\clearpage
-	}
+  \addcontentsline{toc}{section}{\listfigurename}
+  \clearpage
+  \listoffigures
+  \clearpage
+  }
 
 \newcommand{\seznamtab}{% příkaz \seznamtab pro vysázení seznamu obrázků
-	\addcontentsline{toc}{section}{\listtablename}
-	\clearpage
-	\listoftables
-	\clearpage
-	}
-	
+  \addcontentsline{toc}{section}{\listtablename}
+  \clearpage
+  \listoftables
+  \clearpage
+  }
+  
 \newcommand{\seznamlit}[1]{% příkaz \seznamlit pro vysázení seznamu literatury
-	\addcontentsline{toc}{section}{\refname}
-	\begin{thebibliography}{10}
-	#1
-	\end{thebibliography}}
-	
+  \addcontentsline{toc}{section}{\refname}
+  \begin{thebibliography}{10}
+  #1
+  \end{thebibliography}}
+  
 \newcommand{\seznamzkr}{% příkaz \seznamzkr pro přípravu seznamu použitých zkratek a symbolů
-	\nn{Seznam použitých symbolů a zkratek}
-	}
-	
+  \nn{Seznam použitých symbolů a zkratek}
+  }
+  
 \newcommand{\obsah}{% \obsah vysází obsah v daném místě
-	\clearpage
-	\thispagestyle{empty}
-	\tableofcontents
-	\clearpage
-	\pagestyle{fancy}
-	}
+  \clearpage
+  \thispagestyle{empty}
+  \tableofcontents
+  \clearpage
+  \pagestyle{fancy}
+  }
 
 \renewcommand{\b}[1]{\textbf{#1}} % \b = tučně
-\newcommand{\bi}[1]{\textbf{\textit{#1}}}	% \bi = tučná kurzíva
-\renewcommand{\it}[1]{\textit{#1}}		% \it = kurzíva
-	
+\newcommand{\bi}[1]{\textbf{\textit{#1}}} % \bi = tučná kurzíva
+\renewcommand{\it}[1]{\textit{#1}}    % \it = kurzíva
+  
 % ******* NASTAVENÍ ZOBRAZENÍ PŘÍLOH -- SEZNAM, ČÍSLOVÁNÍ, VLASTNÍ STYL *******
 \makeatletter % tímto příkazem dávám najevo, že budu editovat přímo příkazy ze šablony
 
 % definice seznamu příloh - příkaz \listofappendices
 \newcommand{\listofappendices}{%
-	\newpage
-	\setcounter{section}{0}
-	\nn{Seznam příloh}
-	\@restonecolfalse\if@twocolumn\@restonecoltrue\onecolumn\fi
-	\@mkboth{LIST OF APPENDICES}{LIST OF APPENDICES}
-	\@starttoc{loa}\if@restonecol\twocolumn\fi
-	\pagestyle{empty}
-	\thispagestyle{fancy}
-	}
+  \newpage
+  \setcounter{section}{0}
+  \nn{Seznam příloh}
+  \@restonecolfalse\if@twocolumn\@restonecoltrue\onecolumn\fi
+  \@mkboth{LIST OF APPENDICES}{LIST OF APPENDICES}
+  \@starttoc{loa}\if@restonecol\twocolumn\fi
+  \pagestyle{empty}
+  \thispagestyle{fancy}
+  }
 
 \def\ext@appendix{loa}
 \def\tocname{loa}
 
 % definice příkazu \priloha{nazev prilohy} pro vložení nové přílohy
 \newcommand{\priloha}[1]{
-	\clearpage
-	\refstepcounter{section}
-	\addtocontents{loa}{\protect\makebox[1.5cm][l]{P \@Roman\c@section.} #1\newline}
+  \clearpage
+  \refstepcounter{section}
+  \addtocontents{loa}{\protect\makebox[1.5cm][l]{P \@Roman\c@section.} #1\newline}
 {\bf PŘÍLOHA P \@Roman\c@section. \uppercase{#1}}\par\vspace{0.5cm}}
 
 % v obsahu nastavím VELKÉ PÍSMENA pro styl část
 \renewcommand{\part}[1]{
-	\refstepcounter{part}
-	\addcontentsline{toc}{section}{\thepart~~\uppercase{#1}}%
+  \refstepcounter{part}
+  \addcontentsline{toc}{section}{\thepart~~\uppercase{#1}}%
 \clearpage
 \normalfont
-	\vspace*{9cm}
-	\begin{center}\huge \bfseries\thepart. \uppercase{#1}\end{center}%
-	\markboth{}{}\par
+  \vspace*{9cm}
+  \begin{center}\huge \bfseries\thepart. \uppercase{#1}\end{center}%
+  \markboth{}{}\par
 \nobreak
-\clearpage	
+\clearpage  
 }
 % *******************Barevný code *******************
 \definecolor{codeback}{gray}{0.8} %barva pozadi
@@ -242,7 +242,7 @@
 \@addtoreset{table}{section}    % vynulování čítače
 %\@addtoreset{figure}{section}   % vynulování čítače
 \@addtoreset{footnote}{section} % vynulování čítače
-	
+  
 \makeatother % a to je ukončení \makeatletter
 
 % ************* ÚPRAVA VZHLEDU OBSAHU, SEZNAMU OBRÁZKÙ A TABULEK **************
@@ -414,9 +414,15 @@ Ve Zlíně &\hspace{9cm} .......................\\
 \part{Teoretická část}
 
 \section{\upc{Knihovní informační systém}}
-\subsection{Existující}
-\subsection{Funkce}
+Informační systémy obecně se stávají velmi komplexním řešením pro kompletní vedení firem jakýchkoliv rozměrů, zajišťují širokou škálu služeb, od komunikace se zákazníky přes ekonomické systémy až po prodej a~tvorbu obsahu nebo pro evidenci skadu. Takové systémy jsou vyvíjeny většinou dlouhodobě na míru zákazníkovi a~rozvíjeny společně s~jeho růstem a~potřebám. Nebo sa také jedná o~různá spojení stávajících informačních systémů, která jsou často spravována separátně a~nenabízí přehled a~porovnání údajů jednotlivých částí.
 
+\subsection{Existující}
+Velmi častou aplikací, která se používá v~české republice je kombinace účetního systému Pohoda \href{http://www.ucetni-systemy.cz/pohoda-standard/c-4468/}{http://www.ucetni-systemy.cz/pohoda-standard/c-4468/}, která obsahuje kompletní správu pro firmu včetně pokladen skladů a~účetnictví a~dokáže tato data synchronizovat s~některým s~e-shopů např. PrestaShop \href{http://www.prestashop.com/}{http://www.prestashop.com/}. E-comerce a~komunikace se zákazníkem je pak na e-shopu, který většinou slouží pro klasický prodej. Komunikace mezi zaměstnanci probíhá prostřednictvím e-mailů nebo IM a~komunikace se zákazníkem, buď pomocí e-mailů nebo "chatu" přímo v~okně prohlížeče.
+
+Další systémy jsou na tom podobně, co ovšem chybí je např. komunikace s~tvůrcem a~přehledu pro něj, jak se prodává jeho dílo. Nebo přímo rozhraní pro tvorbu knihy online.
+
+\section{\upc{Použité technologie}}
+K~vývoji bylo využito aktuálních nástrojů používaných pro vývoj moderních webových aplikací, které usnadňují práci programátorům a~zrychlují razantně tvorbu aplikace. Důraz je kladen na rychlost a~škálovatelnost takové aplikace.
 
 \section{\upc{COFFEE-SCRIPT}}
 \begin{figure}[h]
@@ -463,7 +469,7 @@ Funkce
       \begin{Verbatim}{frame=single}
 #coffeescript
 square = (x) ->
-	x * x
+  x * x
 
 #javascript
 var square = function(x) {
@@ -555,15 +561,15 @@ class Snake extends Animal
 var Animal, Snake,
   __hasProp = {}.hasOwnProperty,
   __extends = function(child, parent) { 
-	  for (var key in parent) { 
-	  	if (__hasProp.call(parent, key)) child[key] = parent[key]; 
-	  } 
-	  function ctor() { this.constructor = child; } 
-	  	ctor.prototype = parent.prototype; 
-	  	child.prototype = new ctor(); 
-	  	child.__super__ = parent.prototype; 
-	  	return child; 
-	  };
+    for (var key in parent) { 
+      if (__hasProp.call(parent, key)) child[key] = parent[key]; 
+    } 
+    function ctor() { this.constructor = child; } 
+      ctor.prototype = parent.prototype; 
+      child.prototype = new ctor(); 
+      child.__super__ = parent.prototype; 
+      return child; 
+    };
 
 Animal = (function() {
   function Animal(name) {
@@ -775,15 +781,15 @@ Vkládání záznamů:
      \begin{codeframe} 
       \begin{Verbatim}{frame=single}
 db.users.insert(
-	{
-		name: "Franta",
-		email: "franta@franta.cz", 
-		address:{
-			city:"zlín"
-		}
-	})
+  {
+    name: "Franta",
+    email: "franta@franta.cz", 
+    address:{
+      city:"zlín"
+    }
+  })
 \end{Verbatim} 
-	  \end{codeframe}
+    \end{codeframe}
    
 Hlednání:   
      \begin{codeframe} 
@@ -798,21 +804,21 @@ db.bands.find({name: /^Fra.*/})
 #regulérní výrazy v~dotazech
 #vrátí všechny záznamy začínajích na Fra
 \end{Verbatim} 
-	  \end{codeframe}
+    \end{codeframe}
 
 Update:
      \begin{codeframe} 
       \begin{Verbatim}{frame=single}
 db.users.update(
-	{
-		_id: ObjectId("4b76ef5780b71853fe6c89b6")
-	}, {
-		$set: {
-			email: "franta@seznam.cz"
-		}
-	})  
+  {
+    _id: ObjectId("4b76ef5780b71853fe6c89b6")
+  }, {
+    $set: {
+      email: "franta@seznam.cz"
+    }
+  })  
 \end{Verbatim} 
-	  \end{codeframe}
+    \end{codeframe}
 
 Mazání:
 
@@ -820,27 +826,27 @@ Mazání:
       \begin{Verbatim}{frame=single}
 db.users.remove({name: "Franta"})
 \end{Verbatim} 
-	  \end{codeframe}
+    \end{codeframe}
 
 reference:
      \begin{codeframe} 
       \begin{Verbatim}{frame=single}
 #přidáme uživateli knihu
 db.users.update(
-	{
-		_id: ObjectId("4b76ef5780b71853fe6c89b6")
-	}, {
-		$push: {
-			books: new DBRef("books", ObjectId("4b7b1d6bb345126b62fb2230"))
-		}
-	})
+  {
+    _id: ObjectId("4b76ef5780b71853fe6c89b6")
+  }, {
+    $push: {
+      books: new DBRef("books", ObjectId("4b7b1d6bb345126b62fb2230"))
+    }
+  })
 
 #vyhledáme uživatele
 db.users.findOne({_id: ObjectId("4b76ef5780b71853fe6c89b6")})
 {
-	"_id" : ObjectId("4b76ef5780b71853fe6c89b6"),
-	"name":"Franta",
-	"email":"franta@seznam.cz",
+  "_id" : ObjectId("4b76ef5780b71853fe6c89b6"),
+  "name":"Franta",
+  "email":"franta@seznam.cz",
   "books" : [
           {
                   "$ref" : "books",
@@ -848,13 +854,13 @@ db.users.findOne({_id: ObjectId("4b76ef5780b71853fe6c89b6")})
           }
   ],
   "address":{
-		"city":"zlín"
-	}
+    "city":"zlín"
+  }
 }
 #získáme knihy uživatele
 db.users.findOne().books.fetch()
 \end{Verbatim} 
-	  \end{codeframe}
+    \end{codeframe}
 
 \section{\upc{AngularJS}}
 \begin{figure}[h]
@@ -887,69 +893,69 @@ Velmi jednoduchá aplikace v~AngularJS vypadá nějak takto:
 css/
 img/
 js/
-	app.js
-	controllers.js
-	directives.js
-	filters.js
-	services.js
+  app.js
+  controllers.js
+  directives.js
+  filters.js
+  services.js
 lib/
 partials/
 \end{Verbatim} 
-	  \end{codeframe}
+    \end{codeframe}
 Vše je rozděleno do několika javascriptových souborů, které reprezentují jednotlivé moduly AngularJS, je to o~něco málo lepší, než jednosouborové aplikace tak jak to dělá velké množství uživatelů jQuery, ale jednotlivé soubory nereprezentují konkrétní funkcionalitu, takže se v projektu hůře orientuje.\cite{angularJSFolders}
 
 Tento problém řeší rozdělení jednotlivých modulů do několika sub-modulů, které již reprezentují svoji funkcionalitu.
      \begin{codeframe} 
       \begin{Verbatim}{frame=single}
 controllers/
-	LoginController.js
-	RegistrationController.js
-	ProductDetailController.js
-	SearchResultsController.js
+  LoginController.js
+  RegistrationController.js
+  ProductDetailController.js
+  SearchResultsController.js
 common/
-	cartDirective.js
-	productFilter.js
+  cartDirective.js
+  productFilter.js
 models/
-	CartModel.js
-	ProductModel.js
-	SearchResultsModel.js
-	UserModel.js
+  CartModel.js
+  ProductModel.js
+  SearchResultsModel.js
+  UserModel.js
 services/
-	CartService.js
-	UserService.js
-	ProductService.js
+  CartService.js
+  UserService.js
+  ProductService.js
 \end{Verbatim} 
-	  \end{codeframe}
+    \end{codeframe}
 
 V~případě, že vytvářím, větší aplikaci, stane se pro mě toto schéma také nedostatečným, protože ve větších aplikacích už je většinou třeba shlukovat veškeré části dané funkcionality u~sebe, takže ještě je třeba strukturu ještě přeskupit.
      \begin{codeframe} 
       \begin{Verbatim}{frame=single}
 cart/
-	index.less
-	CartModel.js
-	CartService.js
+  index.less
+  CartModel.js
+  CartService.js
 common/
-	cartDirective.js
-	productFilter.js
+  cartDirective.js
+  productFilter.js
 product/
-	search/
-		SearchResultsController.js
-		SearchResultsModel.js
-	ProductDetailController.js
-	ProductModel.js
-	ProductService.js
-	index.less
-	show.html
+  search/
+    SearchResultsController.js
+    SearchResultsModel.js
+  ProductDetailController.js
+  ProductModel.js
+  ProductService.js
+  index.less
+  show.html
 user/
-	show.html
-	edit.html
-	index.less
-	LoginController.js
-	RegistrationController.js
-	UserModel.js
-	UserService.js
+  show.html
+  edit.html
+  index.less
+  LoginController.js
+  RegistrationController.js
+  UserModel.js
+  UserService.js
 \end{Verbatim} 
-	  \end{codeframe}
+    \end{codeframe}
 
 \subsection{Router}
 Router je další důležitá přednost AngularJS, jak už bylo v úvodu zmíněno routování umožňuje přepínat mezi url hashangem a~html5.pushState. Router v AngularJS je navíc modulem, který lze vyměnit takže můžeme místo něj použít třeba ui-router, který jeden z~nejpoužívanějších modulů pro AngularJS. Oproti angular-routeru je ui-router stavový, takže každá změna ui může být reprezentována svým stanem, který můze být jednoduše vnořen a~výsledkem je pak přehledná hierarchie routeru a~url.
@@ -969,7 +975,7 @@ phonecatApp.config [
     ).otherwise redirectTo: "/phones"
 ]
 \end{Verbatim} 
-	  \end{codeframe}
+    \end{codeframe}
 
 Ukázka ui-router
      \begin{codeframe} 
@@ -988,15 +994,155 @@ phonecatApp.config [
     )
 ]
 \end{Verbatim} 
-	  \end{codeframe}
+    \end{codeframe}
 Z ukázky je vidět, že stavy v~ui-routeru, jsou hierarchycké a lépe se v~nich orientuje.
 
+\subsection{Scope}
+Scope je základním stavebním kamenen AngularJS aplikací. Scope reprezentují model aplikace, jsou také místem kde dochází k~vyhodnocení výrazů $\{\{ \}\}$, definujeme zde bussines logic aplikace metody našich controllerů a~vlastnosti views. Scope svazuje controller a~view, těsně před tím než se view zobrazí uživateli, je template prolinkován se scope a~DOM nastaven tak aby o~všech změnách informaval AngularJS.\cite{ngBOOK}
+
+Scope také tvoří hierarchické struktury, téměř každá directiva vytváří vlastní scope.
+
 \subsection{Controller}
+Controller je funkcí, která přidává další funkcionalitu scope a~je volán při jejím vytvoření.\cite{ngBOOK}
+
+Ukázka jednoduchého kontrolleru
+     \begin{codeframe} 
+      \begin{Verbatim}{frame=single}
+#VIEW:
+<div ng-app="myApp">
+  <div ng-controller="Controller" ng-init="init()">
+    Jmeno: {{user}}
+  </div>
+</div>
+
+#CONTROLLER:
+app.controller "Controller", ["$scope","api",($scope,api) ->
+  $scope.user = ""
+  $scope.init =->
+    $scope.user = api.getUser()
+
+#výsledek
+Jmeno: Franta
+\end{Verbatim} 
+    \end{codeframe}
+
 \subsection{Directive}
+Directivy jsou místem kde je v~AngularJS zpracováván DOM. AngularJS je plný directiv\footnote{seznam build-in directiv pro AngularJS je~k~dispozici v~dokumentaci: \href{https://docs.angularjs.org/api/ng/directive}{https://docs.angularjs.org/api/ng/directive}}, už pro vyvoření AngularJS aplikace je třeba využít directivu \it{ng-app}.
+
+Zpracování directivy má 3~fáze, \it{compile, link a controller}, které jsou vykonány v~tomto pořadí. Directivu můžeme bindovat na DOM element několik způsoby:
+\begin{description}
+\item[E] Element <mojeDirectiva></directiva>
+\item[A] Atribut <div mojeDirectiva=""~></div>
+\item[C] Třída <div class="mojeDirectiva"~></div>
+\item[M] Komentář <!-- directive: mojeDirectiva exp -->
+ \end{description}
+
+ Diractiva může mít vlastní HTML template, vlastní scope,controller, můžeme určit prioritu jejího vykonání, apd... Ve všech ohledech je directiva velmi dobře znovuvyužitelný komponent aplikace.
+
+Ukázka directivy:
+     \begin{codeframe} 
+      \begin{Verbatim}{frame=single}
+app.directive "loading",->
+  restrict: "E"
+  replace:true
+  scope:{}
+  link: (scope) ->
+    scope.$on "LOADING",->
+      scope.loading=true
+    scope.$on "LOADING_END",->
+      scope.loading=false
+
+  template:'<div class="loading" ng-if="loading"></div>'
+
+VIEW:
+<loading></loading>
+\end{Verbatim} 
+    \end{codeframe}
+
 \subsection{Factory}
+Obecně lze říci, že service providery, jakým je i~factory, jsou k~tomu aby pro všechny controllery aplikace poskytovali stejné metody a~data, po dobu exsitence aplikace.
+
+Jedná se vždy o~objekt singleton, který je instancován jednou za život aplikace pomocí \it{\$injector} service.\cite{ngBOOK}
+
+Časté je použití factory jako helper pro komunikaci s~backendem aplikace, localStorage, cookieStorage apd,…
+
+Ukázka jednoduché factory pro generování náhodných čísel:
+     \begin{codeframe} 
+      \begin{Verbatim}{frame=single}
+app.factory "random", ->
+  randomNumber:->
+    Math.floor(Math.random())
+  randomNumberBetween:(min,max)->
+    Math.random() * (max - min) + min
+  randomFromArray:(array)->
+    array[Math.floor(Math.random() * array.length)]
+\end{Verbatim} 
+    \end{codeframe}
+
 \subsection{Filter}
-\subsection{Animation}
-\subsection{Value}
+Filter jak už název napovídá je určen pro filtraci dat. Je možné ho použít formou service v~controlleru nebo přímo ve view pomocí "roury" \it{\{\{ data | filter \}\}}. AngularJS má několik buildin filtrů jako je \it{date, lowercase, ...}.
+
+Ale je možné si nadefinovat také vlastní filtry, následující filter děla jednoduchou věc a~to, že~drží danný počet míst čísla tak, že~před číslo doplňuje nuly:
+     \begin{codeframe} 
+      \begin{Verbatim}{frame=single}
+app.filter "numberpad", ->
+  (input, places) ->
+    out = ""
+    if places
+      placesLength = parseInt(places, 10)
+      inputLength = input.toString().length
+      i = 0
+
+      while i < (placesLength - inputLength)
+        out = "0" + out
+        i++
+      out = out + input
+    out
+#použití:
+<div>{{minutes|numberpad:2}}</div>
+
+#výsledek
+$scope.minutes = 1
+<div>01</div>
+\end{Verbatim} 
+    \end{codeframe}
+
+\subsection{Animace}
+Od verze 1.2 disponuje AngularJS přepracovanými animacemi v~samostatném modulu \it{angular-animate}. Definovat animace je díky tomuto modulu velmi jednoduché snadno pochopitelné a~velmi příjemné. K~animacím jsou používány běžné css animace, které jsou definovány pomocí css selectorů. \cite{angularAnimation}
+
+Většina AngularJS directivy jako \it{ngRepeat,ngShow, apd...} má vlastní hooky, které jsou spouštěny v určitých fázích cyklu directivy.
+
+Ukázka ng-show animace:
+\begin{codeframe}
+  \begin{verbatim}
+#DOM
+<div class="check anim" ng-show="checked">
+
+#CSS
+anim {
+  padding:10px;
+  border:1px solid black;
+  background:white;
+}
+
+.anim.ng-hide-add, .anim.ng-hide-remove {
+  transition:all linear 0.5s;
+  display:block!important;
+}
+
+.anim.ng-hide-add.ng-hide-add-active,
+.anim.ng-hide-remove {
+  opacity:0;
+}
+
+.anim.ng-hide-add,
+.anim.ng-hide-remove.ng-hide-remove-active {
+  opacity:1;
+}
+  \end{verbatim}
+\end{codeframe}
+
+Další informace jak vytvářet vlastní animace je možné se dozvědět v~dokumentaci projektu: \href{https://docs.angularjs.org/guide/animations}{https://docs.angularjs.org/guide/animations}
 
 \section{\upc{LESS}}
 \begin{figure}[h]
@@ -1007,6 +1153,38 @@ Z ukázky je vidět, že stavy v~ui-routeru, jsou hierarchycké a lépe se v~nic
 \end{center}
 \caption[Logo Less]{Logo Less}
 \end{figure}
+LESS je pre-processorem CSS stylů a~jeho účelem je rozšířit funkconalitu CSS jazyka. CSS je velmi jednoduché a~nanabízí dynamičnost, která je dnes velmi potřebná a~je často vyžadována projektem samotným. Právě k tomuto účelu se používá pre-procesor. Zejmnéna jsou v~dnešní době používány následující pre-procesory \it{LESS, SASS a Stylus}. Ve své podstatě jsou si podobné a~nabízí i~podobnou funkcionalitu. Všechny mají stejné vnořené selectory, svůj systém promněnných, cykly, mixin, funkce a~mnoho dalších nástrojů usnadňujících práci developerům.\cite{lesscss}
+
+jednoduchá ukázka less:
+\begin{codeframe}
+  \begin{verbatim}
+#proměnná
+@color: #f938ab;
+
+#mixin
+.box-shadow(@style, @c) when (iscolor(@c)) {
+  box-shadow:         @style @c;
+}
+#mixin
+.box-shadow(@style, @alpha: 50%) when (isnumber(@alpha)) {
+  .box-shadow(@style, rgba(0, 0, 0, @alpha));
+}
+
+.box {
+  color: saturate(@color, 5%);
+  #vnořený selector
+  div { .box-shadow(0 0 5px, 30%) }
+}
+
+#výsledek
+.box {
+  color: #fe33ac;
+ }
+.box div {
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+}
+  \end{verbatim}
+\end{codeframe}
 
 \section{\upc{JADE}}
 \begin{figure}[h]
@@ -1017,6 +1195,57 @@ Z ukázky je vidět, že stavy v~ui-routeru, jsou hierarchycké a lépe se v~nic
 \end{center}
 \caption[Logo Jade]{Logo Jade}
 \end{figure}
+Jade je velmi podobý CoffeeScriptu nebo YAMLu, jedná se o~template engine velmi často používaný v~NodeJS aplikacích. Zjednodušuje syntaxy HTML jazyka tím, že odstraňuje párovost HTML tagů a~hierarchii elementů určuje indentace řádků.
+
+Jednoduchá ukázka HTMl dokumentu napsaného v~JADE mluví za vše a~každý kdo zná HTML, zná i~jade:
+\begin{codeframe}
+  \begin{verbatim}
+#JADE
+doctype html
+html(lang="en")
+  head
+    title= pageTitle
+    script(type='text/javascript').
+      if (foo) {
+         bar(1 + 5)
+      }
+  body
+    h1 Jade - node template engine
+    #container.col
+      if youAreUsingJade
+        p You are amazing
+      else
+        p Get on it!
+      p.
+        Jade is a terse and simple
+        templating language with a
+        strong focus on performance
+        and powerful features.
+
+#HTML
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Jade</title>
+    <script type="text/javascript">
+      if (foo) {
+        bar(1 + 5)
+      }
+    </script>
+  </head>
+  <body>
+    <h1>Jade - node template engine</h1>
+    <div id="container" class="col">
+      <p>You are amazing</p>
+      <p>Jade is a terse and simple
+         templating language with a
+         strong focus on performance
+         and powerful features.</p>
+    </div>
+  </body>
+</html>
+  \end{verbatim}
+\end{codeframe}\cite{jade}
 
 \section{\upc{Bower}}
 \begin{figure}[h]
@@ -1025,8 +1254,17 @@ Z ukázky je vidět, že stavy v~ui-routeru, jsou hierarchycké a lépe se v~nic
 \includegraphics[scale=0.5]{./img/bower.png}
 \end{array}$
 \end{center}
-\caption[Logo Less]{Logo Less}
+\caption[Logo Bower]{Logo Bower}
 \end{figure}
+Bower je velmi podobný NodeJS balíčkovacímu systému NPM. Bower, ale slouží k~určení balíčkovýčh závislostí pro různé javascriptové knihovny, jako je AngulaJS, JQuery, apd,... Usnadňuje především plnění závislostí na externích javascriptových knihovnách a~odlehčuje repozitářům, protože odpadá verzování knihovních závislostí a~zůstávají pouze reference na ně, které stáhne bower při buildu aplikace.\cite{bower}
+
+Bower disponuje stejně jako NPM interaktivním scriptem pro vytváření projektů a~má podobnou comand-line syntaxy:
+\begin{description}
+ \item[install] nainstaluje balíčky v bower.json
+ \item[install <balíček>] nainstaluje balíček
+ \item[update] aktualizuje balíčky v bower.json
+ \item[search] vyhledávání balíčků
+\end{description}
 
 \section{\upc{GulpJS}}
 \begin{figure}[h]
@@ -1037,6 +1275,33 @@ Z ukázky je vidět, že stavy v~ui-routeru, jsou hierarchycké a lépe se v~nic
 \end{center}
 \caption[Logo GulpJS]{Logo GulpJS}
 \end{figure}
+Gulp je task runner stejně jako známější Grunt, který je ve světě NodeJS aplikací zřejmně nejpoužívanějším task runnerem. Grunt a Gulp dělají ve~svě podstatě to samé, ale grunt má několik limitů, které překonává právě Gulp. Předvším se jedná o~návaznost úkolů. Grunt pracuje se soubory tak, že spustíme jeden taks např. překlad coffeescriptu, přeložené soubory uložíme, spustíme sloučení (concat) souborů, uložíme jinam spustíme uglifikaci apd,… Gulp používá datové streamy a~roury (pipes), kdy předává výstup jednoho úkolu duhému a~vše je tam v~jenom tasku. Konfigurace je tak mnohem jednodušší a~všechny úkoly probíhají asynchroně.
+
+Ukázka gulp tasku pro zpracování LESS. Pro tento úkol by byly třeba alespoň 3 Grunt tasky.
+\begin{codeframe}
+  \begin{verbatim}
+gulp.task('LESS_DEV', ["SPRITES_DEV"], function() {
+    return gulp.src("./src/less/main.less")
+        .pipe(debug({verbose: true}))
+        .pipe(plumber())
+        .pipe(less())
+        .pipe(autoprefixer(confAutoPrefix))
+        .pipe(gulp.dest("./build"))
+        .pipe(livereload())
+});
+  \end{verbatim}
+\end{codeframe}\cite{jade}
+
+%
+%DALŠÍ
+%
+%browserify,lesshat,bootstrap
+
+% \begin{codeframe}
+%   \begin{verbatim}
+%   <div class="check-element sample-show-hide" ng-show="checked" style="clear:both;">
+%   \end{verbatim}
+% \end{codeframe}
 
 % \begin{figure}[h]
 % \begin{center}$
@@ -1089,16 +1354,229 @@ Z ukázky je vidět, že stavy v~ui-routeru, jsou hierarchycké a lépe se v~nic
 %********************************* Projektová část ************************************
 \part{Projektová část}
 \section{\upc{Funkcionalita}}
-\section{\upc{Rozšíření a návrhy}}
+Vzhledem k~modulárnosti a~škálovatelnosti aplikace lze na funkcionalitu nahlížet ze dvou pohledů.
+
+Prvním je pohled z~hlediska modulárnosti aplikace jako takové a~její škálovatelnosti a~druhým pohled z~hlediska uživateského.
+
+\subsection{Modulární aplikační}
+V tomto pohledu, lze dělit funkcionalitu na Databázi \odkazNaKapitolu{sec:db}, Backend \odkazNaKapitolu{sec:backend} a~Frontend \odkazNaKapitolu{sec:frontend}.
+
+\begin{figure}[h]
+\begin{center}$
+\begin{array}{c}
+\includegraphics[scale=0.5]{./img/graph-structure.png}
+\end{array}$
+\end{center}
+\caption[Diagram struktury aplikace]{Diagram struktury aplikace}
+\end{figure}
+
+Databázovou funkcionalitu obstarává MongoDB server, který je sám o~sobě škálovatelný a~může běžet na několika serverech. 
+
+Backend zajišťuje NodeJS aplikace, kterou lze dělit na části podle funkcionalit a~jednotlivé API mohou běžet na vlastních serverech. např. překlad TeX dokumentů může být uskutečňován na jiném serveru, fronend a~statické soubory mohou být distribuovány z~vlastního serveru, apd... Také zajišťuje integritu dat ukládaných do databáze a~restrikce uživatelského přístupu.
+
+Frontend je pak rozdělen do několik single-page aplikací aby se klientovi, který přijde na e-shop nestahoval zbytečně např. také editor pro tvorbu knih, nebo části aplikace, které by neměly být přístupné. Frontend používá framework AngularJS a~jeho kód je plně vykonáván na klientské stanici, tedy v~prohlížeči. Data se stahují pomocí asynchroních javascriptových requestů.
+
+\subsection{Uživatelská}
+Uživatelská funkcionalita spočívá pouze na frontendu. Ten zajištůje, že uživatel vidí a~kupuje knihy.
+
+Prakticky je frontend rozdělen to těchto single-page aplikací, kde každá znich poskytuje určitou funkcionalitu pro určité spektrum uživatelů.
+
+\begin{description}
+ \item[Store] jedná se o~jednoduchý uživatelsky přívětivý e-shop \odkazNaKapitolu{sec:store}
+ \item[Create] rozhraní pro správu vlastních knih \odkazNaKapitolu{sec:create}
+ \item[Edit] editor knih \odkazNaKapitolu{sec:create}
+ \item[Finance]
+ \item[Storage] sklady \odkazNaKapitolu{sec:storage}
+ \item[Statistics] statistiky \odkazNaKapitolu{sec:stats}
+ \item[Admin] administrace \odkazNaKapitolu{sec:admin}
+\end{description}
+
+jednotlivé aplikace budou rozebrány ve svých kapitolách.
+
+\section{\upc{Adresářová struktura projektu}}
+\begin{codeframe}
+  \begin{verbatim}
+/assets
+  \end{verbatim}
+\end{codeframe}
+statické soubory, do této složky probíhá build FrontEndu aplikace
+
+\begin{codeframe}
+  \begin{verbatim}
+/config
+  \end{verbatim}
+\end{codeframe}
+konfigurační soubory backendu. Nachází se zde 3 soubory pro jednotlivá prosředí.\newline
+\it{appDev} - Development prostředí\newline
+\it{appTest} - Testovací prostředí\newline
+\it{appProd} - Produkční prostředí
+
+\begin{codeframe}
+  \begin{verbatim}
+/database
+  \end{verbatim}
+\end{codeframe}
+Soubory a~funkce související s~databází
+
+\begin{codeframe}
+  \begin{verbatim}
+/database/plugins
+  \end{verbatim}
+\end{codeframe}
+mongoose pluginy
+
+\begin{codeframe}
+  \begin{verbatim}
+/database/schema
+  \end{verbatim}
+\end{codeframe}
+databázové schémata
+
+\begin{codeframe}
+  \begin{verbatim}
+/gulp
+  \end{verbatim}
+\end{codeframe}
+soubory pro build systém
+
+\begin{codeframe}
+  \begin{verbatim}
+/gulp/tasks
+  \end{verbatim}
+\end{codeframe}
+jednotlivé tasky v~samostatných souborech
+
+\begin{codeframe}
+  \begin{verbatim}
+/gulp/util
+  \end{verbatim}
+\end{codeframe}
+pomocné scripty pro build systém
+
+\begin{codeframe}
+  \begin{verbatim}
+/middleware
+  \end{verbatim}
+\end{codeframe}
+express midleware
+
+\begin{codeframe}
+  \begin{verbatim}
+/node_modules
+  \end{verbatim}
+\end{codeframe}
+knihovny pro NodeJS
+
+\begin{codeframe}
+  \begin{verbatim}
+/routes
+  \end{verbatim}
+\end{codeframe}
+routery pro jednotlivá API
+
+\begin{codeframe}
+  \begin{verbatim}
+/src
+    \end{verbatim}
+\end{codeframe}
+zdrojové kódy s frontendovou aplikací
+
+\begin{codeframe}
+  \begin{verbatim}
+/src/app
+    \end{verbatim}
+\end{codeframe}
+hlavní controllery a~vstupní body do jednolivých apikací
+
+\begin{codeframe}
+  \begin{verbatim}
+/src/common
+    \end{verbatim}
+\end{codeframe}
+společné funkce
+
+\begin{codeframe}
+  \begin{verbatim}
+/src/i18n
+    \end{verbatim}
+\end{codeframe}
+překladové soubory
+
+\begin{codeframe}
+  \begin{verbatim}
+/src/images
+    \end{verbatim}
+\end{codeframe}
+obrázky
+
+\begin{codeframe}
+  \begin{verbatim}
+/src/less
+  \end{verbatim}
+\end{codeframe}
+styly
+
+\begin{codeframe}
+  \begin{verbatim}
+/src/*
+  \end{verbatim}
+\end{codeframe}
+každá další složka v src pak obsahuje určitou funkcionalitu
+např. složka \it{users} obsahuje vše ohledně správy uživatelů. Uspořádané do modulů. Hlavní modul je popsán souboru index.coffee nachází se zde také soubor se styly index.less, templaty *.tpl.html a~další CoffeeScript soubory s~funkcionalitou.
 
 
-\section{\upc{Databáze}}
+\begin{codeframe}
+  \begin{verbatim}
+/tmp
+  \end{verbatim}
+\end{codeframe}
+dočasné soubory, předevší \it{templates.js} a~\it{sprites.less}
+
+\begin{codeframe}
+  \begin{verbatim}
+/vendor
+  \end{verbatim}
+\end{codeframe}
+bower componenty
+
+\begin{codeframe}
+  \begin{verbatim}
+/views
+  \end{verbatim}
+\end{codeframe}
+Hlavní jade soubory, které jsou načítány klientem
+
+Další soubory v root aplikace
+\begin{codeframe}
+  \begin{verbatim}
+/app.js
+#vstupní soubor nodejs aplikace, poze otevírá index.coffee
+/bower.json
+#nastavení bower
+/coffeelint.json
+#nastaveni coffeelint
+/config.coffee
+#konfigurační funkce aplikace
+/gulpfile.js
+#spouštěč build systému
+/LICENCE
+#licence aplikace
+/package.json
+#nastavení NPM
+/README.md
+#soubor s informacemi o aplikaci
+  \end{verbatim}
+\end{codeframe}
+
+Jak je vidět projekt je fragmentován na co nejmenší komponenty tak aby se v~něm dalo snadno orientovat i~pokud projekt vidíte poprvé.
+
+\section{\upc{Databáze}}\label{sec:db}
 \subsection{Návrh/schéma}
 \subsection{Budoucí vývoj}
 \subsection{Zabezpečení}
 \subsection{Nasazení (server,cloud)}
 
-\section{\upc{Backend}}
+\section{\upc{Backend}}\label{sec:backend}
 \subsection{Struktura}
 \subsection{API}
 \subsection{Zabezpečení}
@@ -1107,17 +1585,17 @@ Z ukázky je vidět, že stavy v~ui-routeru, jsou hierarchycké a lépe se v~nic
 \subsection{Přihlášení a soukromí uživatelů}
 \subsection{ACL}
 
-\section{\upc{Frontend}}
+\section{\upc{Frontend}}\label{sec:frontend}
 \subsection{Struktura}
 \subsection{Komponenty}
 
-\subsubsection{Store (e-shop)}
-\subsubsection{Create (správa vlastních knih)}
-\subsubsection{Edit (editor knih)}
-\subsubsection{Finance}
-\subsubsection{Storage (pobočky a sklady)}
-\subsubsection{Statistics (statistiky)}
-\subsubsection{Admin (administrace)}
+\subsubsection{Store (e-shop)}\label{sec:store}
+\subsubsection{Create (správa vlastních knih)}\label{sec:create}
+\subsubsection{Edit (editor knih)}\label{sec:edit}
+\subsubsection{Finance}\label{sec:finance}
+\subsubsection{Storage (pobočky a sklady)}\label{sec:storage}
+\subsubsection{Statistics (statistiky)}\label{sec:stats}
+\subsubsection{Admin (administrace)}\label{sec:admin}
 
 
 \section{\upc{Gulp}}
@@ -1147,6 +1625,11 @@ Programming in interpreted language BASH is very interesting, especially due to 
 \bibitem{abcLinuxuSerialMongo}http://www.abclinuxu.cz/clanky/programovani/lehky-uvod-do-mongodb. [e-kniha] 
 \bibitem{angularGITHUB}https://github.com/angular/angular.js. [e-kniha] 
 \bibitem{angularJSFolders}http://cliffmeyers.com/blog/2013/4/21/code-organization-angularjs-javascript. [e-kniha] 
+\bibitem{ngBOOK}NGBOOK. [e-kniha] 
+\bibitem{angularAnimation} https://docs.angularjs.org/guide/animations [e]
+\bibitem{lesscss} http://lesscss.org/ [e]
+\bibitem{jade} http://jade-lang.com/
+\bibitem{bower} http://bower.io/
 \bibitem{BASHen}http://www.nodejs.cz/co-je-event-driven-architektura/. [e-kniha] 
 }
 

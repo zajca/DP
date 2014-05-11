@@ -1394,156 +1394,157 @@ Prakticky je frontend rozdělen to těchto single-page aplikací, kde každá zn
 jednotlivé aplikace budou rozebrány ve svých kapitolách.
 
 \section{\upc{Adresářová struktura projektu}}
+
+statické soubory, do této složky probíhá build FrontEndu aplikace
 \begin{codeframe}
   \begin{verbatim}
 /assets
   \end{verbatim}
 \end{codeframe}
-statické soubory, do této složky probíhá build FrontEndu aplikace
 
+konfigurační soubory backendu. Nachází se zde 3 soubory pro jednotlivá prosředí.\newline
 \begin{codeframe}
   \begin{verbatim}
 /config
   \end{verbatim}
 \end{codeframe}
-konfigurační soubory backendu. Nachází se zde 3 soubory pro jednotlivá prosředí.\newline
 \it{appDev} - Development prostředí\newline
 \it{appTest} - Testovací prostředí\newline
 \it{appProd} - Produkční prostředí
 
+Soubory a~funkce související s~databází
 \begin{codeframe}
   \begin{verbatim}
 /database
   \end{verbatim}
 \end{codeframe}
-Soubory a~funkce související s~databází
 
+mongoose pluginy
 \begin{codeframe}
   \begin{verbatim}
 /database/plugins
   \end{verbatim}
 \end{codeframe}
-mongoose pluginy
 
+databázové schémata
 \begin{codeframe}
   \begin{verbatim}
 /database/schema
   \end{verbatim}
 \end{codeframe}
-databázové schémata
 
+soubory pro build systém
 \begin{codeframe}
   \begin{verbatim}
 /gulp
   \end{verbatim}
 \end{codeframe}
-soubory pro build systém
 
+jednotlivé tasky v~samostatných souborech
 \begin{codeframe}
   \begin{verbatim}
 /gulp/tasks
   \end{verbatim}
 \end{codeframe}
-jednotlivé tasky v~samostatných souborech
 
+pomocné scripty pro build systém
 \begin{codeframe}
   \begin{verbatim}
 /gulp/util
   \end{verbatim}
 \end{codeframe}
-pomocné scripty pro build systém
 
+express midleware
 \begin{codeframe}
   \begin{verbatim}
 /middleware
   \end{verbatim}
 \end{codeframe}
-express midleware
 
+knihovny pro NodeJS
 \begin{codeframe}
   \begin{verbatim}
 /node_modules
   \end{verbatim}
 \end{codeframe}
-knihovny pro NodeJS
 
+routery pro jednotlivá API
 \begin{codeframe}
   \begin{verbatim}
 /routes
   \end{verbatim}
 \end{codeframe}
-routery pro jednotlivá API
 
+zdrojové kódy s frontendovou aplikací
 \begin{codeframe}
   \begin{verbatim}
 /src
     \end{verbatim}
 \end{codeframe}
-zdrojové kódy s frontendovou aplikací
 
+hlavní controllery a~vstupní body do jednolivých apikací
 \begin{codeframe}
   \begin{verbatim}
 /src/app
     \end{verbatim}
 \end{codeframe}
-hlavní controllery a~vstupní body do jednolivých apikací
 
+společné funkce
 \begin{codeframe}
   \begin{verbatim}
 /src/common
     \end{verbatim}
 \end{codeframe}
-společné funkce
 
+překladové soubory
 \begin{codeframe}
   \begin{verbatim}
 /src/i18n
     \end{verbatim}
 \end{codeframe}
-překladové soubory
 
+obrázky
 \begin{codeframe}
   \begin{verbatim}
 /src/images
     \end{verbatim}
 \end{codeframe}
-obrázky
 
+styly
 \begin{codeframe}
   \begin{verbatim}
 /src/less
   \end{verbatim}
 \end{codeframe}
-styly
 
+každá další složka v src pak obsahuje určitou funkcionalitu
+např. složka \it{users} obsahuje vše ohledně správy uživatelů. Uspořádané do modulů. Hlavní modul je popsán souboru index.coffee nachází se zde také soubor se styly index.less, templaty *.tpl.html a~další CoffeeScript soubory s~funkcionalitou.
 \begin{codeframe}
   \begin{verbatim}
 /src/*
   \end{verbatim}
 \end{codeframe}
-každá další složka v src pak obsahuje určitou funkcionalitu
-např. složka \it{users} obsahuje vše ohledně správy uživatelů. Uspořádané do modulů. Hlavní modul je popsán souboru index.coffee nachází se zde také soubor se styly index.less, templaty *.tpl.html a~další CoffeeScript soubory s~funkcionalitou.
 
+dočasné soubory, předevší \it{templates.js} a~\it{sprites.less}
 \begin{codeframe}
   \begin{verbatim}
 /tmp
   \end{verbatim}
 \end{codeframe}
-dočasné soubory, předevší \it{templates.js} a~\it{sprites.less}
 
+bower componenty
 \begin{codeframe}
   \begin{verbatim}
 /vendor
   \end{verbatim}
 \end{codeframe}
-bower componenty
 
+Hlavní jade soubory, které jsou načítány klientem
 \begin{codeframe}
   \begin{verbatim}
 /views
   \end{verbatim}
 \end{codeframe}
-Hlavní jade soubory, které jsou načítány klientem
 
 Další soubory v root aplikace
 \begin{codeframe}
@@ -1589,8 +1590,6 @@ Dalším faktorem zabezpečení je pak zabezpečení serverové. V případě za
 \subsection{Struktura}
 \subsection{API}
 \subsection{Zabezpečení}
-\subsubsection{Server}
-\subsubsection{Kontejner}
 \subsection{Přihlášení a soukromí uživatelů}
 \subsection{ACL}
 
@@ -1620,7 +1619,7 @@ Díky cloudu můžeme také odhadnout náklady a~nároky koupi vlastní serverov
 
 Velmi vhodným je pak hybridní řešení, kdy je část aplikace provozována na vlastním serveru a~část v~cloudu. Často je v~cloudu provozována především databázová část. \\
 
-V případě koupi vlastní serverové infrastruktury, je třeba myslet na vysokou dostupnost služby tzv. HA\footnote{HA - High Avaibility - dva nebo více serverů jsou vzájemnými klony, a~v~případě výpadku jednoho, nebo více, serverů výpadek nepocítí koncový uživatel, maximálně může dojít ke zpomalení služby v~případě, že by výkon po výpadku byl nedostatečný.}. Nestačí tedy koupit jeden fyzický stroj a~něm provozovat službu. Je třeba koupit minimálně dva stroje a~pokud jeden vypadne zastoupí jej server druhý. Takové řešení má, ale své nevýhody, ta největší je především to, že druhý server běží a~spotřebovává energii naprosto zbytečně přičemž vyžaduje stejnou údržbu a~hrozí u~něj stejná pravděpodobnost HW chyby jako u~serveru, který je využíván. Proto je vhodné před tyto dva (nebo více serverů) umístít load balancer, který by rovnoměrně rozděloval zátěž mezi ně. Díky load balanceru, jsou servery rovnoměrně využívány a~v~případě výpadku převezmou automaticky všechny požadavky funkční servery. 
+V případě koupi vlastní serverové infrastruktury, je třeba myslet na vysokou dostupnost služby tzv. HA\footnote{HA - High Avaibility - dva nebo více serverů jsou vzájemnými klony, a~v~případě výpadku jednoho, nebo více, serverů výpadek nepocítí koncový uživatel, maximálně může dojít ke zpomalení služby v~případě, že by výkon po výpadku byl nedostatečný.}. Nestačí tedy koupit jeden fyzický stroj a~něm provozovat službu. Je třeba koupit minimálně dva stroje a~pokud jeden vypadne zastoupí jej server druhý. Takové řešení má, ale své nevýhody, ta největší je především to, že druhý server běží a~spotřebovává energii naprosto zbytečně přičemž vyžaduje stejnou údržbu a~hrozí u~něj stejná pravděpodobnost HW chyby jako u~serveru, který je využíván. Proto je vhodné před tyto dva (nebo více serverů) umístít load balancer, který by rovnoměrně rozděloval zátěž mezi ně. Díky load balanceru, jsou servery rovnoměrně využívány a~v~případě výpadku převezmou automaticky všechny požadavky funkční servery.\\
 
 \subsection{MongoDB}
 V~rozdělení zátěže a~lepšího škálování služeb přispívá i~samotné MongoDB, které umožňuje sharding několika MongoDB serverů a~replikaci data. Sharding, je ale velmi náročný a~k~sprovoznění shardingu je třeba alespoň 7mi serverů, 3~konfigurační, 2~a~více routerů a~2~a~více replik.\cite{sharding}

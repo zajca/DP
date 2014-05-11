@@ -1524,7 +1524,6 @@ styly
 každá další složka v src pak obsahuje určitou funkcionalitu
 např. složka \it{users} obsahuje vše ohledně správy uživatelů. Uspořádané do modulů. Hlavní modul je popsán souboru index.coffee nachází se zde také soubor se styly index.less, templaty *.tpl.html a~další CoffeeScript soubory s~funkcionalitou.
 
-
 \begin{codeframe}
   \begin{verbatim}
 /tmp
@@ -1573,8 +1572,18 @@ Jak je vidět projekt je fragmentován na co nejmenší komponenty tak aby se v~
 \section{\upc{Databáze}}\label{sec:db}
 \subsection{Návrh/schéma}
 \subsection{Budoucí vývoj}
+MongoDB a~jeho absence schémat zajišťuje snadnější rozšiřitelnost aplikace, není třeba nijak zvláště řešit relace mezi kolekcemi a~už vůbec ne schéma, protože MongoDB nemá žádné schéma. Prakticky stačí změnit schéma v~mongoose, které je pouze aplikační a~MongoDB o~něm neví, a restartovat aplikace (nebo provést deploy).
+
+Z funkcionálního hlediska pak budoucí vývoj záleží na požadvavcích zákazníka, prakticky by pak další vývoj pravděpodobně zahrnoval rozšíření dat, které jsou zaznamenávány o~uživateli aby mu pak aplikace sama nabízela knihy a~informavala o~novinkách, které uživatel může pravděpodobně chtít, na základě procházených, koupených knih nebo i~informací o~procházení jiných webových stránek.
+
+Dalším bodem rozšíření je pak reklama, jak už reklama na položky portálu samotného tak i~placená inzerce dalších portálů a~služeb.
+
 \subsection{Zabezpečení}
-\subsection{Nasazení (server,cloud)}
+MongoDB má vlastní systém zabezpečení, který spočívá v~několika systémových rolích vlastním ACL a~omezení přístupu uživatelů k~databázím a~kolekcím. Ovšem aplikace reálně potřebuje přístup jak ke čtení tak k~zápisu do své databáze takže není na místě řešit jakékoliv složitější práva. Ta by mohla přijít vhod v~případě rozdělení aplikace na několik samostatných rozhraní, které by nepotřebovali např. přístup do některých kolekcí nebo zápis do nich. Takový případ by však nastal v~případě obrovských návštěvností a~jak už bylo řečeno penetrace rozhraní a~zařízení přistupujích do databáze.
+
+Dalším faktorem zabezpečení je pak zabezpečení serverové. V případě zabezpečení databází obecně, je na snadě zamezit maximálně přímé interakce uživatele a~databáze. Pokud není databáze sdílená a~nepotřebují přístup další externí uživatelé, což je případ spíše multihostingů, kde je většinou otevřený port přímo do databáze nebo je nabízeno rozhraní pro databázi (PHPMyAdmin pro MYSQl, pro MongoDB např. RockMongo). Proto je většinou přístupový bod do databáze možný pouze z~místní sítě aplikace tj. z~jejího aplikačního clusteru. V~tomto nanejvíš vhodném případě je pak přítup do databáze buď přímý přes databázový port nebo přes nějaké rozhraní pro databázi (RockMongo).V~takovém případě je pak třeba vytvořit v~místní síti aplikace server pro vzdálený přístup, vhodným řešením je např. OpenVPN nebo jiný SW pro vzdálený přístup nebo připojení počítače do vzdálené místní sítě v~Internetu.
+
+\subsubsection{Nastavení zabezpečení MongoDB}
 
 \section{\upc{Backend}}\label{sec:backend}
 \subsection{Struktura}
@@ -1600,6 +1609,41 @@ Jak je vidět projekt je fragmentován na co nejmenší komponenty tak aby se v~
 
 \section{\upc{Gulp}}
 
+\section{\upc{Nasazení aplikace (server,cloud)}}
+V~dnešní době, kdy jsou moderní cloudové služby, které umožňují s~minimální počáteční investicí spustit projek prakticky jakékoliv velikosti. Je velmi dobré zvážit cloudové nasazení buď samostatné databáze nebo většinou kompletního projektu. Samozřejmě záleží především na finanční situaci provozovatele naší služby, jejím aktuálním stavu a~návštěvnosti.
+
+Cloud řeší především velké počáteční náklady na sprovoznění služby. Díky škálovatelnosti cloudových služeb nemusíme nijak zvlášť řešit jak velké množství prostředků bude potřeba. Není třeba kupovat fyzické stroje nebo pronajímat dedikované servery. Není třeba shánět zaměstnance, kteří by se starali o~chod serverů nebo platit za nějaké manage řešení.
+
+Cloud dává možnosti také rozdělení služeb a~jejich chod u~několika poskytovatelů ať už kvůli dalšímu šetření nákladů ( např. pokud bude MongoDB hosting levnější u~jiného posktovatele bude u~jednoho aplikační část a~u~druhého databázová část apd,… ) nebo dostupnosti z~globálního hlediska v~různých zemích nebo kontinentech.
+
+Díky cloudu můžeme také odhadnout náklady a~nároky koupi vlastní serverové infrastruktury, protože po dobu provozu v~cloudu, by bylo nasbíráno velké množství metrik a~následně odhadnuty nároky na vlastní řešení.
+
+Velmi vhodným je pak hybridní řešení, kdy je část aplikace provozována na vlastním serveru a~část v~cloudu. Často je v~cloudu provozována především databázová část. 
+
+V případě koupi vlastní serverové infrastruktury, je třeba myslet na vysokou dostupnost služby tzv. HA\footnote{HA - High Avaibility - dva nebo více serverů jsou vzájemnými klony, a~v~případě výpadku jednoho, nebo více, serverů výpadek nepocítí koncový uživatel, maximálně může dojít ke zpomalení služby v~případě, že by výkon po výpadku byl nedostatečný.}. Nestačí tedy koupit jeden fyzický stroj a~něm provozovat službu. Je třeba koupit minimálně dva stroje a~pokud jeden vypadne zastoupí jej server druhý. Takové řešení má, ale své nevýhody, ta největší je především to, že druhý server běží a~spotřebovává energii naprosto zbytečně přičemž vyžaduje stejnou údržbu a~hrozí u~něj stejná pravděpodobnost HW chyby jako u~serveru, který je využíván. Proto je vhodné před tyto dva (nebo více serverů) umístít load balancer, který by rovnoměrně rozděloval zátěž mezi ně. Díky load balanceru, jsou servery rovnoměrně využívány a~v~případě výpadku převezmou automaticky všechny požadavky funkční servery. 
+
+V~rozdělení zátěže a~lepšího škálování služeb přispívá i~samotné MongoDB, které umožňuje sharding několika MongoDB serverů a~replikaci data. Sharding, je ale velmi náročný a~k~sprovoznění shardingu je třeba alespoň 7mi serverů, 3~konfigurační, 2~a~více routerů a~2~a~více replik.\cite{sharding}
+\begin{figure}[h]
+\begin{center}$
+\begin{array}{c}
+\includegraphics[scale=0.5]{./img/sharding.png}
+\end{array}$
+\end{center}
+\caption[Diagram MongoDB sharding]{Diagram produkčního clusteru pro MongoDB sharding.}
+\end{figure}
+Sharding je třeba vhodný především pokud množství paměti RAM nedostačuje MongoDB požadavkům, nebo nedostačuje diskový prostor.\cite{sharding}
+
+Jednoduší možnosti škálovatelnosti MongoDB je replikace, která je třeba i~v~případě že je použit sharding. Jedná se o~podobný koncept jako je load balancování requestů pro webový server. Je jeden primární MongoDB server, který příjmá požadavky a~přeposílá je pro zpracování sekundárním serverům, které vracejí výsledky.
+\begin{figure}[h]
+\begin{center}$
+\begin{array}{c}
+\includegraphics[scale=0.5]{./img/replica.png}
+\end{array}$
+\end{center}
+\caption[Diagram MongoDB replikace]{Diagram jednoduché replikace MongoDB serverů.}
+\end{figure}
+
+
 
 %********************************* Závěr ************************************
 \nn{Závěr}
@@ -1608,14 +1652,6 @@ Cílem této bakalářské práce bylo vytvořit sadu skriptů v~jazyce BASH pro
 V~teoretické části bylo provedeno seznámení s~Linuxem, jeho distribucemi a~možnostmi tvorby distribucí včetně kompilace zdrojových kódů a~programování v~interpretovaném jazyce BASH, což~jsou důležité znalosti pro vytvoření distribuce Linuxu. Dále bylo provedeno seznámení se zabezpečením Linuxu a~systémem hodnocení bezpečnosti Softwaru. Praktická část byla věnována skriptům v~interpretovaném jazyce BASH, jejich struktuře, obsahu a~návodu pro použití. Skripty byly otestovány jak na virtuálním počítači, vytvořeného programem VirtualBox a~s~použitím systému Ubuntu 10.10 Maverick Meerkat, tak na fyzickém počítači se~systémem ArchLinux.\\
 
 Programování v~interpretovaném jazyce BASH je velmi zajímavé, zvláště vzhledem k~jeho integraci se systémem Linux. Jsem rád, že~jsem si mohl rozšířit prostřednictvím této bakalářské práce znalosti tohoto jazyka, o~tomto svědčí i~fakt, že jsem dvakrát přepsal způsob jakým skripty fungují. Také jsem rozšířil své znalosti o~tom jak funguje Operační systém Linux v~širším měřítku, za~což jsem velmi rád.
-%********************************* Závěr anglicky************************************
-\newpage
-\nn{Závěr v Angličtině}
-The aim of this bachelor work was to~create a~set of~BASH scripts for~automatic compilation Linux From Scratch distribution. For the~design of~scripts was used Linux From Scratch book and~in~no small part contributed GIT version control system and community site for managing git repositories GitHub. 
-
-In the theoretical part was made introduction with Linux, the~Linux distributions and creation of~Linux distributions, including a~compilation of~source code and~programming interpreted language BASH, which are~important skills for~a~building Linux distribution. It~was also made familiar with~the~security of~Linux and~system software safety assessment. The~practical part was devoted to~scripts in~BASH, its structure, contents and~instructions for~use. Scripts was~tested in~virtual computer created by~program VirtualBox and~runing Ubuntu 10.10 Meerkat Maverick, and~at~the~physical computer running ArchLinux. 
-
-Programming in interpreted language BASH is very interesting, especially due to integration with Linux. I'm glad that I was able to extend my knowledge of~BASH becouse of this work. True of that was demonstrated by the fact that I'm twice rewrote the way how the script works. I also expanded my knowledge about the functioning of the Linux operating system on a larger scale, for which I am very happy.
 
 \newpage
 %********************************* Seznam Literatury ************************************
@@ -1630,7 +1666,8 @@ Programming in interpreted language BASH is very interesting, especially due to 
 \bibitem{lesscss} http://lesscss.org/ [e]
 \bibitem{jade} http://jade-lang.com/
 \bibitem{bower} http://bower.io/
-\bibitem{BASHen}http://www.nodejs.cz/co-je-event-driven-architektura/. [e-kniha] 
+\bibitem{BASHen}http://www.nodejs.cz/co-je-event-driven-architektura/. [e-kniha]
+\bibitem{sharding}http://docs.mongodb.org/manual/core/sharding/.
 }
 
 %********************************* Seznam zkratek ************************************

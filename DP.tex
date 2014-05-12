@@ -320,7 +320,7 @@
 %\put(0,-150){\makebox(170,25){\fontsize{20}{1}\b{\textsf{\jmeno}}}}
 %*******************************konec uvodni stranka na dva radky***********************
 \put(0,-115){\makebox(170,50){\fontsize{24}{1}\b{\textsf{\predmet}}}}
-\put(0,-130){\makebox(170,50){\fontsize{22}{1}\b{\textsf{\predmeten}}}}
+% \put(0,-130){\makebox(170,50){\fontsize{22}{1}\b{\textsf{\predmeten}}}}
 \put(0,-150){\makebox(170,25){\fontsize{20}{1}\b{\textsf{\jmeno}}}}
 \put(82.2,-223.3){\makebox(84,16.4){\includegraphics[width=84mm]{fai_logo_cz.png}}}
 \put(0,-205){\linethickness{1pt}\line(1,0){170}}
@@ -342,27 +342,16 @@
 \voffset=-1.61cm\evensidemargin=0.96cm\oddsidemargin=0.96cm\headsep=1cm\headheight=0.5cm\setlength{\parskip}{3pt}\textheight=248mm\textwidth=155mm
 \nm{\uppercase{Abstrakt - smazat}}
 \vspace{1cm}
-Tato bakalářská práce v teoretické části definuje základní pojmy, jako jsou Linux, dále pak linuxové distribuce, jazyk BASH, zabezpečení operačního systému Linux a~LiveCD. Úvodní část je věnována informacím o~systému Linux a~distribuci Linux From Scratch. Dále pak obsahuje stručný úvod do jazyka BASH a~kompilaci zdrojových kódů včetně možností sestavení Linuxových distribucí. Na závěr teoretické části je popsáno zabezpečení Linuxu, hodnocení bezpečnosti Software a tvorba LiveCD.\\
-
-V praktické části je rozebrána struktura scriptů a~funkce vytvořené v~jazyce BASH. Dále je uveden návod~na sestavení distribuce LFS pomocí vytvořených skriptů. A~na~závěr uvedeny zdroje pomoci při chybách v~kompilaci a~možnosti zlepšení skriptů.
+text
 \vspace{1cm}
 
 \emph{Klíčová slova:} Linux, distribuce, BASH, LFS, LiveCD, bezpečnost Linuxu, kompilace, DAC, MAC
 \vspace{2cm}
 
-\nns{\uppercase{Abstract  - smazat}}
-This bachelor work includes the terms such as~Linux in~it's~theoretical part. Further, the terms such as~Linux distribution, BASH language, operating system security, and~LiveCD. The~introductory part is~dedicated to~the~information about the~Linux system and~Linux From Scratch distribution. Then it~also includes brief introduction to~the~BASH language and~the~source code compilation, including the~possibility to~compile Linux distributions. At~the~end of~the~theoretical part, there is~described Linux security, the~evaluation of~Software security and~the~LiveCD creation.\\
-
-In the practical part, there is~analysed the~script structure and~the~functions written in~BASH language. Next, there is~the~manual for~compiling LFS distributions using the~generated scripts. And~at~the~end of~this part, there are~mentioned resources to~compilation errors and~the possibilities of~script improvement.
-\vspace{1cm}
-
-\emph{Keywords:} Linux, distribution, BASH, LFS, LiveCD, Linux security, compilation, DAC, MAC
 %********************************* poděkování, motto, úryvky knih, básní atp. ************************************
 \clearpage
 \thispagestyle{empty}
  - smazat
-Chtěl bych poděkovat především vedoucímu mé bakalářské práce, panu doc. Ing.~Martinu~Syslovy,~Ph.D., za jeho cenné rady a~připomínky.
-Dále bych chtěl poděkovat celé mojí rodině za její obrovskou podporu během celého mého studia a~také mým přátelům, se kterými jsem prožil tři roky studia na Univerzitě Tomáše Bati.
 
 \vspace{3cm}
 "Nejlepší knihy jsou takové, které člověku říkají, co už sám ví."\\
@@ -1686,49 +1675,42 @@ Jak je vidět projekt je fragmentován na co nejmenší komponenty tak aby se v~
 \section{\upc{Databáze}}\label{sec:db}
 \subsection{Návrh/schéma}
 \subsubsection{Users}
+Kolekce uživatelů je nedílnou součástí každého informačního systému, slouží k přihlašování uživatelů i ke správě zaměstnanců a určování práv v aplikaci.
 \begin{codeframe}
   \begin{verbatim}
-  email:
-    type: String
-    required: true
-    unique: true
-    index: true
-  img:
-    type: Schema.Types.Mixed
-  locale:
-    type: String
-  name:
-    type:String
-    required:true
-  surname:
-    type:String
-    required:true
-  tokenMaxAge:
-    type: Number
-    required: true
-    default: config.options.maxAge
-  cookieTokenSalt:
-    type: String
-    required: true
-  storageTokenSalt:
-    type: String
-    required: true
-  passwordSalt:
-    type: String
-    required: true
-  password:
-    type: String
-    required: true
-  address:
-    [
-      state: String
-      city: String
-      street: String
-      postal: Number
-      home_number: Number
-      type: String
-    ]
-  billing_address:[
+email:
+  type: String
+  required: true
+  unique: true
+  index: true
+img:
+  type: Schema.Types.Mixed
+locale:
+  type: String
+name:
+  type:String
+  required:true
+surname:
+  type:String
+  required:true
+tokenMaxAge:
+  type: Number
+  required: true
+  default: config.options.maxAge
+cookieTokenSalt:
+  type: String
+  required: true
+storageTokenSalt:
+  type: String
+  required: true
+passwordSalt:
+  type: String
+  required: true
+password:
+  type: String
+  required: true
+address:
+  [
     state: String
     city: String
     street: String
@@ -1736,72 +1718,454 @@ Jak je vidět projekt je fragmentován na co nejmenší komponenty tak aby se v~
     home_number: Number
     type: String
   ]
-  tel:
-    type:String
-    required:true
-  orders:
-    [
-      type: Schema.Types.ObjectId
-      ref: "Order"
-    ]
-  projects:
-    [
-      type: Schema.Types.ObjectId
-      ref: "Project"
-    ]
-  whished_books:
-    [
-      type: Schema.Types.ObjectId
-      ref: "Book"
-    ]
-  payed_books:
-    [
-      type: Schema.Types.ObjectId
-      ref: "Book"
-    ]
-  roles:
-    type: [String]
-    default: ['anonymous']
-  special:
-    canRead:
-      projects:[
-        type: Schema.Types.ObjectId
-        ref: "Project"
-      ]
-    canEdit:
-      projects:[
-        type: Schema.Types.ObjectId
-        ref: "Project"
-      ]
-  meta: [
-    key: String
-    value: String
+billing_address:[
+  state: String
+  city: String
+  street: String
+  postal: Number
+  home_number: Number
+  type: String
+]
+tel:
+  type:String
+posititon:
+  type:String
+  required:false
+    \end{verbatim}
+\end{codeframe}
+První část dokumentu uživatele se zabívá klasickými uživatelskými informacemi. K čemu slouží všechny salty bude probráno v sekci přihlášování uživatelů.
+
+\begin{codeframe}
+  \begin{verbatim}
+orders:
+  [
+    type: Schema.Types.ObjectId
+    ref: "Order"
   ]
-  updated_at:
-    type:Date
-    default: Date.now
-  created_at:
-    type:Date
-    default: Date.now
+projects:
+  [
+    type: Schema.Types.ObjectId
+    ref: "Project"
+  ]
+whished_books:
+  [
+    type: Schema.Types.ObjectId
+    ref: "Book"
+  ]
+payed_e_books:
+  [
+    type: Schema.Types.ObjectId
+    ref: "Book"
+  ]
+payed_books:
+  [
+    type: Schema.Types.ObjectId
+    ref: "Book"
+  ]
+favourite_books:
+  [
+    type: Schema.Types.ObjectId
+    ref: "Book"
+  ]
+    \end{verbatim}
+\end{codeframe}
+Další část dokumentu se zabívá především referencemi na knihy. Uživatel může mít velké množství objednávek, které samostatně obsahují všechny uživatelovi informace. Každý uživatel může tvořit také knihy takže mu náleží kolekce projektů, může si přát knihy, které mu mohou kupovat známí a~může mít označeny své oblíbené knihy. Velmi důležitou položkou jsou pak zaplacené knihy, podle tehoto pole systém pozná, které knihy může uživatel stáhnou ve formátu PDF nebo jestli si je koupil v~tiskovém vydání.
+
+\begin{codeframe}
+  \begin{verbatim}
+roles:
+  type: [String]
+  default: ['anonymous']
+special:
+  canRead:
+    [
+      collection: String
+      reference: String
+    ]
+  canEdit:
+    [
+      collection: String
+      reference: String
+    ]
+    \end{verbatim}
+\end{codeframe}
+Následu část zabívající se právy uživatele, uživatel může mít definované role a~zvláštní práva pro čtení a~zápis pro různé kolekce.
+
+\begin{codeframe}
+  \begin{verbatim}
+User-Agent:String
+remoteAddress:String
+X-Forwarded-For:String
+last_login:
+  type:Date
+  default: Date.now
   \end{verbatim}
 \end{codeframe}
+Důležité je také uchovávat informace o~posledním přihlášení uživatele a~odkuk byl uživatel přihlášen. Především kvůli bezpečnosti uživatele, kdy uživatel nebo i~systém automaticky může některé přihlášení vyhodnotit jako falešné, především na základě geolokačních dat IP adresy. Více údajů o~předchozích přihlášeních, lze pak vyčíst z~Auth logu \odkazNaKapitolu{database:log}.
+
+\begin{codeframe}
+  \begin{verbatim}
+meta: [
+  key: String
+  value: String
+]
+updated_at:
+  type:Date
+  default: Date.now
+created_at:
+  type:Date
+  default: Date.now
+  \end{verbatim}
+\end{codeframe}
+Poslední částí, se bude opakovat téměř ve všech kolekcích takže nebude dále uvedena. Zabívá se především dalších popisků objektu a~časy vytvoření a poslední úpravy.
 
 \subsubsection{Books}
+Tou nejdůležitější částí databáze knihkupectví jsou knihy, pro ty je určena kolekce \it{book}, která zajišťuje kompletní informace o~knize od jejího popisu až po informace o~historii ceny prodejích a autorovi.
+\begin{codeframe}
+  \begin{verbatim}
+name:
+  type: String
+  required: true
+  index: true
+author:
+  name:
+    type: String
+    required: true
+  description: String
+  img:
+    data: Buffer
+    contentType: String
+url:
+  type: String
+owner:
+  type: Schema.Types.ObjectId
+  ref: "User"
+img:
+  small:
+    data: Buffer
+    contentType: String
+  big:
+    data: Buffer
+    contentType: String
+genres:[
+  name: 
+    type: String
+    index: true
+]
+keywords:
+  type:String
+  required:false
+pages:
+  type: Number
+  required: true
+  \end{verbatim}
+\end{codeframe}
+První část dokumentu se zabívá popisem knihy a~jejím autorem. Přesto, že~by se po zvyklostech z~SQL databází mohlo zdát výhodnější mít autory v~samostatné kolekci není tomu tak, v~tomto případě se stáhnou informace o~autorovi společně s~knihou a~informace o~autorovi se mohou u~každé knihy měnit např. podle období kdy knihu napsal. Dotaz na vyhledání autora v kolekci podle jména není nijak složitý. Následující vrátí všechny knihy, které~mají ve jméně autora řetězec \it{George}.
+\begin{codeframe}
+  \begin{verbatim}
+name = 'George';
+book.find({author.name: new RegExp('^'+name+'$', "i")}, function(err, doc) {
+  console.log doc
+}
+  \end{verbatim}
+\end{codeframe}
+U náročnějšího systému by bylo pak zřejmně vhodné vytvořit pro autory ještě samostatnou kolekci, ale~údaje o~autorovi zanechávat také v~knihách a~kolekci autorů používat pouze pro vyhledání knih konkrétních autorů.
+
+\begin{codeframe}
+  \begin{verbatim}
+commets:[
+  {
+    author:
+      type: String
+      require: true
+    coment:
+      type: String
+      require: true
+    user:
+      type: Schema.Types.ObjectId
+      ref: "User"
+  }
+]
+rating:[
+  {
+    value:
+      type: Number
+      require: true
+    user:
+      type: Schema.Types.ObjectId
+      ref: "User"
+  }
+]
+review:[
+  {
+    title:
+      type: String
+      require: true
+    user:
+      type: Schema.Types.ObjectId
+      ref: "User"
+    content: String
+  }
+]
+  \end{verbatim}
+\end{codeframe}
+Další v~kolekci jsou pak data, kterými přispívají uživatelé. Jsou možné přidávat komentáře, hodnotit knihy a~psát recenze.
+
+\begin{codeframe}
+  \begin{verbatim}
+buyers:[
+  type: Schema.Types.ObjectId
+  ref: "User"
+]
+number_of_sales:
+  type:Number
+  required:false
+avaible:Boolean
+delivery_msg:String
+price:
+  type:Number
+released:Date
+public_from:Date
+buy_allowed_from:Date
+description:String
+publisher:String
+price_hystory:[
+  {
+    date:
+      type:Date
+      default: Date.now
+    value:
+      type:Number
+  }
+]
+  \end{verbatim}
+\end{codeframe}
+Poslední část dokumentu je pouze statistická, je zde výčet uživatelů, kteří si knihu koupily, historie ceny, dostupnost knihy a~informace o~vydání.
+
 \subsubsection{Orders}
+Objednávka je v SQL databázích většinou předmětem velkého množství relací na uživatele adresy, schvalování, dopravu apd,… Toto všecho NoSQL databáze řeší velmi elegantně v jediném dokumentu. Bez jakých kolik relací, které vy vyžadovali další odkazování. Navíc pokud je obejdnávka již jendou vytvořena neměl by její obsah být pozměněn referncemi.
+\begin{codeframe}
+  \begin{verbatim}
+  user:
+    name:
+      type:String
+      required: true
+    surname:
+      type:String
+      required: true
+    tel:
+      type:String
+      required: true
+    email:
+      type:String
+      required: true
+    user:
+      type: Schema.Types.ObjectId
+      ref: "User"
+  price:
+    type:Number
+    required: true
+  \end{verbatim}
+\end{codeframe}
+První část obsahuje informace o~kupujícím včetně reference na něj, ale v případě, že v budoucnu dojde ke smazání kupujícího, data o~obchodu sním jsou stále zaznamenána a~konzistentní.
+
+\begin{codeframe}
+  \begin{verbatim}
+  items:[
+    name:
+      type: String
+      required: true
+      index: true
+    author:
+      type: String
+      required: true
+    price:
+      type:Number
+      required: true
+    released:Date
+    description:String
+    pages:
+      type: Number
+    book:
+      type: Schema.Types.ObjectId
+      ref: "User"
+  ]
+  \end{verbatim}
+\end{codeframe}
+Velmi důležitý je seznam zakoupených položek. Opět je část základních data zkopírována do dokementu aby nedošlo ke~změnám v~objenávkách následkem změny reference.
+
+\begin{codeframe}
+  \begin{verbatim}
+  confirmed:Boolean
+  states:[
+    title:String
+    description:String
+    date:Date
+      default: Date.now
+    user:
+      type: Schema.Types.ObjectId
+      ref: "User"
+  ]
+    \end{verbatim}
+\end{codeframe}
+Objednávka má samozřejmně svou historii a~to od chvíle jejího vytvoření až do chvíle jejího zrušení. Proto jsou v~této části definovány změny v~objednávce. Pokaždé když objednávka postoupí schvalovacím procesem, nebo změnou zapíše se zpráva co se stalo a~kdo akci vyvolal.
+
+\begin{codeframe}
+  \begin{verbatim}
+  custom_id:String
+  custom_description:String
+  payed:Boolean
+  billing_address:
+    state: String
+    city: String
+    street: String
+    postal: Number
+    home_number: Number
+    type: String
+  destination_address:
+    state: String
+    city: String
+    street: String
+    postal: Number
+    home_number: Number
+    type: String
+  pay_method:
+    name:
+      type:String
+      required: true
+    card_number:
+      type:Number
+  delivery_method:
+    name:
+      type:String
+      required: true
+    price:
+      type:Number
+      required: true
+    branche:
+      name: String
+      city: String
+      street: String
+      postal: Number
+      home_number: Number
+      tel: Number
+      \end{verbatim}
+\end{codeframe}
+Poslední část se zabívá obchodem samotným. Uživatel má možnost zvolit vlastní identifikator objednávky, metodu platby, kam bude objednávka zaslána, kam fakturována a~jestli byla objednávka z~e-shopu nebo z~pobočky.//
+
 \subsubsection{Project}
-\subsubsection{Renders}
+
 \subsubsection{Branches}
+Knihkupetví většinou nemají pouze internetový obchod, ale také kammené pobočky. Pro držení informací o~pobočkách slouží kolekce Branches.
+\begin{codeframe}
+  \begin{verbatim}
+  name:
+    type: String
+    required: true
+  address:
+    state: String
+    city: String
+    street: String
+    postal: Number
+    home_number: Number
+    type: String
+  contacts:[
+    {
+      name: String
+      description: String
+      tel: String
+      fax: String
+      email: String
+    }
+  ]
+  employes:[
+    {
+      name:String
+      position:String
+      paychecks:[
+        priod_from:Date
+        priod_to:Date
+        sended:Date
+        sum:Number
+        info:[
+          title:String
+          score:string
+        ]
+      ]
+      user:
+        type: Schema.Types.ObjectId
+        ref: "User"
+    }
+  ]
+  \end{verbatim}
+\end{codeframe}
+Kolekce poboček musí samozřejmně obsahovat informace o~pobočce samotné a také o jejích zaměstatnancích zaměstnacích, platech zaměstnanců apd,…
+
+\begin{codeframe}
+  \begin{verbatim}
+  books_on_sale:[
+    {
+      type: Schema.Types.ObjectId
+      ref: "Book"
+    }
+  ]
+  books_to_arrive:[
+    {
+      order_date: Date
+      arrival_date: Date
+      state:String
+      book:
+        type: Schema.Types.ObjectId
+        ref: "Book"
+    }
+  ]
+  orders:[
+    {
+      type: Schema.Types.ObjectId
+      ref: "Order"
+    }
+  ]
+    \end{verbatim}
+\end{codeframe}
+Každá pobočka si navíc musí vést informace o~knihách dostupných na pobočce, knihách které má objednány a~uskutečněných prodejích.
+
 \subsubsection{Config}
+config je pouze jednoduchá key:value databáze určená ke změnám v~prostředí aplikace, tyto změny pak nepotřebují restart nodejs serveru. Vhodným řešením takovéto kolekce, je pak cachování do jiné NoSQL databáze jako je Redis nebo Memcache.//
+
 \subsubsection{Pages}
-Kolekce statických stránek.
-\subsubsection{Data}
-GridFS kolekce pro ukládání binárních dat pro stránky.
+Kolekce statických stránek. Jedná se o~kolekci editovatelných webových stránek. Např. informace o~obchodu, kontakty apd,…
+
+\begin{codeframe}
+  \begin{verbatim}
+  title:
+    type: String
+    required: true
+  url:
+    type: String
+    index: true
+  content:String
+  img:[
+      name:String
+      img:
+        data: Buffer
+        contentType: String
+  ]
+  meta: [
+      {
+        key: String
+        value: String
+      }
+    ]
+  \end{verbatim}
+\end{codeframe}
+Kolekce odpovídá struktuře bězné webové stránky. Obsahuje odkaz na stránku titulek, obsah, obrázky a~meta tagy velmi důležité především pro SEO optimalizace.
+
 \subsubsection{Logs}
 Důležitým aspektem u~každého webového systému jsou logy a~logování co největšího množství událostí, nejenom pro statistické údaje, ale i~pro případ stížností ze~strany klienta ať už kvůli ztrátě dat nebo nefunkčnosti funkcí.
 
 Pro logování má informační systém několik logů, každý určený pro jiný typ události.
 
-\begin{description}
+\begin{description}\label{database:log}
 \item[Edit log] slouží pro zaznamenávání událostí spojených s~úpravou a~vytváření knih.
 \item[Auth log] log pro zaznamenávání událostí souvisejících s~přihlašováním. Např. uživatel se přihlásil, odhlásil, registroval, zadal špatné heslo, přišel do aplikace apd,…
 \item[Admin log] v tomto logu se zaznamenávají události spojené s~administrací. Pokud uživatel s~vyšším oprávněním něco změní, zobrazí se tato událost zde.
@@ -1894,7 +2258,7 @@ MongoDB má vlastní systém zabezpečení, který spočívá v~několika systé
 Dalším faktorem zabezpečení je pak zabezpečení serverové. V případě zabezpečení databází obecně, je na snadě zamezit maximálně přímé interakce uživatele a~databáze. Pokud není databáze sdílená a~nepotřebují přístup další externí uživatelé, což je případ spíše multihostingů, kde je většinou otevřený port přímo do databáze nebo je nabízeno rozhraní pro databázi (PHPMyAdmin pro MYSQl, pro MongoDB např. RockMongo). Proto je většinou přístupový bod do databáze možný pouze z~místní sítě aplikace tj. z~jejího aplikačního clusteru. V~tomto nanejvíš vhodném případě je pak přítup do databáze buď přímý přes databázový port nebo přes nějaké rozhraní pro databázi (RockMongo).V~takovém případě je pak třeba vytvořit v~místní síti aplikace server pro vzdálený přístup, vhodným řešením je např. OpenVPN nebo jiný SW pro vzdálený přístup nebo připojení počítače do vzdálené místní sítě v~Internetu.
 
 \subsubsection{Nastavení zabezpečení MongoDB}
-
+  
 \section{\upc{Backend}}\label{sec:backend}
 \subsection{Struktura}
 \subsection{API}
@@ -2082,11 +2446,6 @@ webovou adresu aplikace je pak možné získat po přihlášení na webu openshi
 
 %********************************* Závěr ************************************
 \nn{Závěr}
-Cílem této bakalářské práce bylo vytvořit sadu skriptů v~jazyce BASH pro automatické sestavení Linuxové distribuce Linux From Scratch. Pro návrh skriptů byl použit návod pro sestavení distribuce Linux From Scratch a~nemalou měrou přispěl i~verzovací systém GIT a~komunitní web pro správu git repozitářů GitHub.\\
-
-V~teoretické části bylo provedeno seznámení s~Linuxem, jeho distribucemi a~možnostmi tvorby distribucí včetně kompilace zdrojových kódů a~programování v~interpretovaném jazyce BASH, což~jsou důležité znalosti pro vytvoření distribuce Linuxu. Dále bylo provedeno seznámení se zabezpečením Linuxu a~systémem hodnocení bezpečnosti Softwaru. Praktická část byla věnována skriptům v~interpretovaném jazyce BASH, jejich struktuře, obsahu a~návodu pro použití. Skripty byly otestovány jak na virtuálním počítači, vytvořeného programem VirtualBox a~s~použitím systému Ubuntu 10.10 Maverick Meerkat, tak na fyzickém počítači se~systémem ArchLinux.\\
-
-Programování v~interpretovaném jazyce BASH je velmi zajímavé, zvláště vzhledem k~jeho integraci se systémem Linux. Jsem rád, že~jsem si mohl rozšířit prostřednictvím této bakalářské práce znalosti tohoto jazyka, o~tomto svědčí i~fakt, že jsem dvakrát přepsal způsob jakým skripty fungují. Také jsem rozšířil své znalosti o~tom jak funguje Operační systém Linux v~širším měřítku, za~což jsem velmi rád.
 
 \newpage
 %********************************* Seznam Literatury ************************************

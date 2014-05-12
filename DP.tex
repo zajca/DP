@@ -1685,6 +1685,202 @@ Jak je vidět projekt je fragmentován na co nejmenší komponenty tak aby se v~
 
 \section{\upc{Databáze}}\label{sec:db}
 \subsection{Návrh/schéma}
+\subsubsection{Users}
+\begin{codeframe}
+  \begin{verbatim}
+  email:
+    type: String
+    required: true
+    unique: true
+    index: true
+  img:
+    type: Schema.Types.Mixed
+  locale:
+    type: String
+  name:
+    type:String
+    required:true
+  surname:
+    type:String
+    required:true
+  tokenMaxAge:
+    type: Number
+    required: true
+    default: config.options.maxAge
+  cookieTokenSalt:
+    type: String
+    required: true
+  storageTokenSalt:
+    type: String
+    required: true
+  passwordSalt:
+    type: String
+    required: true
+  password:
+    type: String
+    required: true
+  address:
+    [
+      state: String
+      city: String
+      street: String
+      postal: Number
+      home_number: Number
+      type: String
+    ]
+  billing_address:[
+    state: String
+    city: String
+    street: String
+    postal: Number
+    home_number: Number
+    type: String
+  ]
+  tel:
+    type:String
+    required:true
+  orders:
+    [
+      type: Schema.Types.ObjectId
+      ref: "Order"
+    ]
+  projects:
+    [
+      type: Schema.Types.ObjectId
+      ref: "Project"
+    ]
+  whished_books:
+    [
+      type: Schema.Types.ObjectId
+      ref: "Book"
+    ]
+  payed_books:
+    [
+      type: Schema.Types.ObjectId
+      ref: "Book"
+    ]
+  roles:
+    type: [String]
+    default: ['anonymous']
+  special:
+    canRead:
+      projects:[
+        type: Schema.Types.ObjectId
+        ref: "Project"
+      ]
+    canEdit:
+      projects:[
+        type: Schema.Types.ObjectId
+        ref: "Project"
+      ]
+  meta: [
+    key: String
+    value: String
+  ]
+  updated_at:
+    type:Date
+    default: Date.now
+  created_at:
+    type:Date
+    default: Date.now
+  \end{verbatim}
+\end{codeframe}
+
+\subsubsection{Books}
+\subsubsection{Orders}
+\subsubsection{Project}
+\subsubsection{Renders}
+\subsubsection{Branches}
+\subsubsection{Config}
+\subsubsection{Pages}
+Kolekce statických stránek.
+\subsubsection{Data}
+GridFS kolekce pro ukládání binárních dat pro stránky.
+\subsubsection{Logs}
+Důležitým aspektem u~každého webového systému jsou logy a~logování co největšího množství událostí, nejenom pro statistické údaje, ale i~pro případ stížností ze~strany klienta ať už kvůli ztrátě dat nebo nefunkčnosti funkcí.
+
+Pro logování má informační systém několik logů, každý určený pro jiný typ události.
+
+\begin{description}
+\item[Edit log] slouží pro zaznamenávání událostí spojených s~úpravou a~vytváření knih.
+\item[Auth log] log pro zaznamenávání událostí souvisejících s~přihlašováním. Např. uživatel se přihlásil, odhlásil, registroval, zadal špatné heslo, přišel do aplikace apd,…
+\item[Admin log] v tomto logu se zaznamenávají události spojené s~administrací. Pokud uživatel s~vyšším oprávněním něco změní, zobrazí se tato událost zde.
+\item[Views log] tento log slouží především pro statistiky zaznamenávají se zde informace o~tom, který uživatel kdy navštívil kterou stránku.
+\item[Orders log] v tomto logu se zaznamnávají události související s~objednáváním knih jako, uživatel vytvořil objednávku, přidal položku, zaplatil objednávku, zrušil objednávku apd,…
+\item[Branches log] záznam událostí spojených s~pobočkami.
+\end{description}
+logovací kolekce vypadají velmi podobně, proto bude popsána obecná struktura záznamu.
+
+\begin{codeframe}
+  \begin{verbatim}
+_user_id
+  \end{verbatim}
+\end{codeframe}
+reference na uživatele, který vyvolal akci, pokud není uvedena je uživatel anonymní.
+
+\begin{codeframe}
+  \begin{verbatim}
+_page_id
+  \end{verbatim}
+\end{codeframe}
+reference na stránku. (používá se u view logu aby bylo možné získat statistiku navštívené stránky a~auth logu aby bylo možné zjisti na, kterou stránku se uživatel pokusil přihlásit)
+
+\begin{codeframe}
+  \begin{verbatim}
+url
+  \end{verbatim}
+\end{codeframe}
+URL adresa kde byla událost vyvolána
+
+\begin{codeframe}
+  \begin{verbatim}
+message
+  \end{verbatim}
+\end{codeframe}
+popis události
+
+\begin{codeframe}
+  \begin{verbatim}
+event
+  \end{verbatim}
+\end{codeframe}
+název události
+
+\begin{codeframe}
+  \begin{verbatim}
+type
+  \end{verbatim}
+\end{codeframe}
+typ události (ERROR, INFO, DEBUG, WARN)
+
+\begin{codeframe}
+  \begin{verbatim}
+User-Agent
+  \end{verbatim}
+\end{codeframe}
+pro lepší vyhodnocení události a~případný troubleshoot jsou zaznamenány informace o~prohlížeči
+
+\begin{codeframe}
+  \begin{verbatim}
+remoteAddress
+  \end{verbatim}
+\end{codeframe}
+záznam IP adresy, ze která záznam vyvolala
+
+\begin{codeframe}
+  \begin{verbatim}
+X-Forwarded-For
+  \end{verbatim}
+\end{codeframe}
+stejný záznam jako předchozí sloužící pro získání IP adresy v~případě,že se aplikace nachází za proxy serverem.
+
+\begin{codeframe}
+  \begin{verbatim}
+created_at
+  \end{verbatim}
+\end{codeframe}
+čas kdy byla událost vytvořena.
+
 \subsection{Budoucí vývoj}
 MongoDB a~jeho absence schémat zajišťuje snadnější rozšiřitelnost aplikace, není třeba nijak zvláště řešit relace mezi kolekcemi a~už vůbec ne schéma, protože MongoDB nemá žádné schéma. Prakticky stačí změnit schéma v~mongoose, které je pouze aplikační a~MongoDB o~něm neví, a restartovat aplikace (nebo provést deploy).\\
 

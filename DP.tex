@@ -410,6 +410,9 @@ Velmi častou aplikací, která se používá v~české republice je kombinace �
 
 Další systémy jsou na tom podobně, co ovšem chybí je např. komunikace s~tvůrcem a~přehledu pro něj, jak se prodává jeho dílo. Nebo přímo rozhraní pro tvorbu knihy online.\\
 
+\subsection{Proces schvalování knih}\label{sec:schvalovani}
+
+
 \section{\upc{Použité technologie}}
 K~vývoji bylo využito aktuálních nástrojů používaných pro vývoj moderních webových aplikací, které usnadňují práci programátorům a~zrychlují razantně tvorbu aplikace. Důraz je kladen na rychlost a~škálovatelnost takové aplikace.\\
 
@@ -1495,6 +1498,14 @@ Prakticky je frontend rozdělen to těchto single-page aplikací, kde každá zn
 
 jednotlivé aplikace budou rozebrány ve svých kapitolách.
 
+\subsection{Proces schvalování knihy}
+Podobně jako byl v teoretické části popsán proces schvalovaní knihy \odkazNaKapitolu{sec:schvalovani} probíhá proces schvalování i~v~aplikaci.
+
+Proces schvalování má x kroků
+....
+
+Po schválení projektu může proběhnou akce vytvoření knihy z~projektu. Je standartně vytvořena kniha a~zní odkázáno na projekt, který jí předcházel. I~po publikaci je možné vytvořit opravy přímo pro již existující knihu. Nebo vydat další vydání ať už jako aktualizaci nebo novou knihu.
+
 \section{\upc{Adresářová struktura projektu}}
 
 statické soubory, do této složky probíhá build FrontEndu aplikace
@@ -1873,10 +1884,11 @@ pages:
 První část dokumentu se zabívá popisem knihy a~jejím autorem. Přesto, že~by se po zvyklostech z~SQL databází mohlo zdát výhodnější mít autory v~samostatné kolekci není tomu tak, v~tomto případě se stáhnou informace o~autorovi společně s~knihou a~informace o~autorovi se mohou u~každé knihy měnit např. podle období kdy knihu napsal. Dotaz na vyhledání autora v kolekci podle jména není nijak složitý. Následující vrátí všechny knihy, které~mají ve jméně autora řetězec \it{George}.
 \begin{codeframe}
   \begin{verbatim}
-name = 'George';
-book.find({author.name: new RegExp('^'+name+'$', "i")}, function(err, doc) {
-  console.log doc
-}
+name = 'George'
+book.find(
+  author.name: new RegExp('^'+name+'$', "i"), (err, doc)->
+    console.log doc
+)
   \end{verbatim}
 \end{codeframe}
 U náročnějšího systému by bylo pak zřejmně vhodné vytvořit pro autory ještě samostatnou kolekci, ale~údaje o~autorovi zanechávat také v~knihách a~kolekci autorů používat pouze pro vyhledání knih konkrétních autorů.
@@ -2141,6 +2153,50 @@ Každá pobočka si navíc musí vést informace o~knihách dostupných na pobo�
 
 \subsubsection{Config}
 config je pouze jednoduchá key:value databáze určená ke změnám v~prostředí aplikace, tyto změny pak nepotřebují restart nodejs serveru. Vhodným řešením takovéto kolekce, je pak cachování do jiné NoSQL databáze jako je Redis nebo Memcache.//
+
+\subsubsection{Troubleshoot}
+V případě, že~má uživatel portálu dotaz, je k~dispozici troubleshoot kolekce, která zajišťuje komunikaci uživatelů s~provozovatelem služby.
+\begin{codeframe}
+  \begin{verbatim}
+title:
+  type: String
+  required: true
+msg:
+  type: String
+user_started:
+  name:String
+  user:
+    type: Schema.Types.ObjectId
+    ref: "User"
+user_involved:[
+  name:String
+  user:
+    type: Schema.Types.ObjectId
+    ref: "User"
+]
+alert_users:[
+  type: Schema.Types.ObjectId
+  ref: "User"
+]
+stage:
+  type: String
+priority:
+  type: String
+conversation:[
+  msg:
+    type: String
+  stage_change:Boolean
+  priority_change:Boolean
+  user:
+    name:String
+    user:
+      type: Schema.Types.ObjectId
+      ref: "User"
+]
+    \end{verbatim}
+\end{codeframe}
+Každé vlákno problémů má svůj titulek úvodní zprávu, jménu uživatele, který~ho vytvořil, seznam uživatelů zapojených do řešení, seznam uživatelů, kteří jsou informováni o~změnách ve vlákně. Každé vlákno má navíc prioritu a~fázi ve, které se nachází. Samozřejmě je možné přidávat zprávy, které mohou být navíc označeny jako změna priority nebo změna stavu.
+
 
 \subsubsection{Pages}
 Kolekce statických stránek. Jedná se o~kolekci editovatelných webových stránek. Např. informace o~obchodu, kontakty apd,…

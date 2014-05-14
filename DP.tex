@@ -2152,10 +2152,31 @@ Kolekce poboček musí samozřejmně obsahovat informace o~pobočce samotné a t
 Každá pobočka si navíc musí vést informace o~knihách dostupných na pobočce, knihách které má objednány a~uskutečněných prodejích.
 
 \subsubsection{Config}
-config je pouze jednoduchá key:value databáze určená ke změnám v~prostředí aplikace, tyto změny pak nepotřebují restart nodejs serveru. Vhodným řešením takovéto kolekce, je pak cachování do jiné NoSQL databáze jako je Redis nebo Memcache.//
+config je pouze jednoduchá key:value databáze určená ke změnám v~prostředí aplikace, tyto změny pak nepotřebují restart nodejs serveru. Vhodným řešením takovéto kolekce, je pak cachování do jiné NoSQL databáze jako je Redis nebo Memcache.\\
+
+\begin{codeframe}
+  \begin{verbatim}
+config.groups:[
+  name:String
+  colection_r:[String]
+  colection_w:[String]
+  actions_allowed:[String]
+  routes_allowed:[String]
+]
+    \end{verbatim}
+\end{codeframe}
+Klíč \it{groups} zajištuje nastavení skupin a~přístup k~jednotlivým akcím
+
+\begin{codeframe}
+  \begin{verbatim}
+config.actions:[String]
+    \end{verbatim}
+\end{codeframe}
+Seznam akcí backendu.
 
 \subsubsection{Troubleshoot}
-V případě, že~má uživatel portálu dotaz, je k~dispozici troubleshoot kolekce, která zajišťuje komunikaci uživatelů s~provozovatelem služby.
+V případě, že~má uživatel portálu dotaz, je k~dispozici troubleshoot kolekce, která zajišťuje komunikaci uživatelů s~provozovatelem služby.\\
+
 \begin{codeframe}
   \begin{verbatim}
 title:
@@ -2304,13 +2325,6 @@ X-Forwarded-For
 \end{codeframe}
 stejný záznam jako předchozí sloužící pro získání IP adresy v~případě,že se aplikace nachází za proxy serverem.
 
-\begin{codeframe}
-  \begin{verbatim}
-created_at
-  \end{verbatim}
-\end{codeframe}
-čas kdy byla událost vytvořena.
-
 \subsection{Budoucí vývoj}
 MongoDB a~jeho absence schémat zajišťuje snadnější rozšiřitelnost aplikace, není třeba nijak zvláště řešit relace mezi kolekcemi a~už vůbec ne schéma, protože MongoDB nemá žádné schéma. Prakticky stačí změnit schéma v~mongoose, které je pouze aplikační a~MongoDB o~něm neví, a restartovat aplikace (nebo provést deploy).\\
 
@@ -2324,8 +2338,11 @@ MongoDB má vlastní systém zabezpečení, který spočívá v~několika systé
 Dalším faktorem zabezpečení je pak zabezpečení serverové. V případě zabezpečení databází obecně, je na snadě zamezit maximálně přímé interakce uživatele a~databáze. Pokud není databáze sdílená a~nepotřebují přístup další externí uživatelé, což je případ spíše multihostingů, kde je většinou otevřený port přímo do databáze nebo je nabízeno rozhraní pro databázi (PHPMyAdmin pro MYSQl, pro MongoDB např. RockMongo). Proto je většinou přístupový bod do databáze možný pouze z~místní sítě aplikace tj. z~jejího aplikačního clusteru. V~tomto nanejvíš vhodném případě je pak přítup do databáze buď přímý přes databázový port nebo přes nějaké rozhraní pro databázi (RockMongo).V~takovém případě je pak třeba vytvořit v~místní síti aplikace server pro vzdálený přístup, vhodným řešením je např. OpenVPN nebo jiný SW pro vzdálený přístup nebo připojení počítače do vzdálené místní sítě v~Internetu.
 
 \subsubsection{Nastavení zabezpečení MongoDB}
-  
+Zabezpečení MongoDB databáze je velmi jednoduché a~lze jej sprovoznit pomocí MongoDB cli. Nejprve je třeba spustit program \it{"mongo"}, který je standardní součástí
+
 \section{\upc{Backend}}\label{sec:backend}
+O část aplikace na straně serveru se stará NodeJS server postavený frameworku express spolu ODM mongoose pro práci s~databází. 
+
 \subsection{Struktura}
 \subsection{API}
 \subsection{Zabezpečení}
@@ -2346,6 +2363,123 @@ Dalším faktorem zabezpečení je pak zabezpečení serverové. V případě za
 
 
 \section{\upc{Gulp}}
+Gulp je používán pro sestavení frontendu aplikace, možné je sestavit aplikaci pro produkční a~vývojové účely. Gulp má pro to dva základní tasky \it{dev} a~\it{prod}. Gulp konkrétně sestavuje javascript pomocí browserify, vytváří sprity\footnote{sprite se požívá u~webu pro snížení počtu requestů při načítání. Spojuje obrázky do jednoho velkého obrázku, ze kterého jsou obrázky v~CSS referoncovány pomocí souřadnic a~velikosti }, optimalizuje obrázky, překládá LESS styly na CSS, převádí html soubory do angularové templateCache, takže se všechny views stáhnou spolu s~aplikací, a~obnovuje prohlížeč při změnách v~projektu.
+\subsection{Struktura}
+Gulp čte v~adresáři kde je spuštěn soubor \it{Gulpfile.js}, ten v~tomto projektu pouze načítá soubor \it{gulp/index.js}. Načtou se všechny soubory ve složce \it{gulp/tasks} a~následně spustí task určený paramentrem příkazu \it{gulp}.
+
+\subsection{Development/Production}
+Development prostředí oproti produkčnímu nastavuje některé podrobnější výpisy a~především neprovádí optimalizaci kódu a~obrázků.\\
+
+\begin{description}
+\item[Tasky:]
+
+\item[Browserify] - Jak už bylo řečeno Browserify překládá zdrojové kódy v~coffeescriptu na javascript. Navíc má aplikace několik prostředí, kde má každé vlastní kód. Proto je vytváření prostředí ve smyčce.
+\begin{codeframe}
+  \begin{verbatim}
+var enviroments = ["editor","store","admin"]
+enviroments.forEach(function (element, index, array) {
+  return browserify({
+      entries: ['./src/app/'+element+'.coffee'],
+      extensions: ['.coffee'],
+      transform: ["coffeeify","brfs","envify","browserify-shim"]
+  })
+  .bundle({debug: true})
+  .on('error', handleErrors)
+  .pipe(source(''+element+'.js'))
+  .pipe(gulp.dest('./assets/js/'))
+  .pipe(livereload());
+})
+    \end{verbatim}
+\end{codeframe}
+
+\item[Clean] - Clean pouze čistí projekt před buildem aby ve složce kam bude buildováno nezůstaly staré soubory.
+\begin{codeframe}
+  \begin{verbatim}
+gulp.task('clean', function() {
+return gulp.src(["./build", "./tmp/**/*"], {
+      read: false
+    }).pipe(clean());
+});
+  \end{verbatim}
+\end{codeframe}
+
+\item[Images] - Images především kopíruje obrázky se zdrojové složky, v~produkčním prostředí pak obrázky ještě optimalizuje. \it{pozn. cesta k souboru *.\_NS.png je přítomna, protože všechny png soubory jsou automaticky převáděny do spritu, kromě souborů se~sufixem "\_NS", které jsou zpracovány právě zde.}
+\begin{codeframe}
+  \begin{verbatim}
+gulp.task('images', function() {
+return gulp.src('./src/images/**/*{.ico,.svg,.gif,_NS.png}')
+  .pipe(changed(dest))
+  .pipe(imagemin())
+  .pipe(gulp.dest('./build/images'));
+});
+  \end{verbatim}
+\end{codeframe}
+
+\item[Less] - Task Less při svém volání vždy spustí task SPRITES. Je provedena kontrola pomocí \it{recess} a~css kód je automaticky prefixován pro prohlížeče nastavené v~konfiguraci. Při produkčním buildu se pak soubor, ještě minifikuje nastavuje je se mu přípona \it{.min} a~modul \it{rev} vygeneruje do názvu souboru náhodný řetězec, který zaručí, že pokud proběhne změna aplikace na severu, klient stáhne html soubor, a~protože je jiný název css souboru než má uloženo prohlížeč v~cache tak prohlížeč stáhne novou verzi. Pokud by se název souboru nezměnil, načetl by prohlížeč soubor z~paměti a~stránka by byla zastaralá a~třeba i~nefunkční.
+\begin{codeframe}
+  \begin{verbatim}
+gulp.task('LESS', ["SPRITES"], function() {
+    return gulp.src("./src/less/main.less")
+        .pipe(recess())
+        .pipe(less())
+        .pipe(autoprefixer(confAutoPrefix))
+        .pipe(minifycss())
+        .pipe(rename({suffix: ".min"}))
+        .pipe(rev())
+        .pipe(gulp.dest("./assets/css"))
+});
+  \end{verbatim}
+\end{codeframe}
+
+\item[Sprites] - Sprity především snižují počet requestů při načítání aplikace a zjednodušují vkládání obrázků při kódování. Weby mají často množství obrázkových ikon a~obrázků potřebných pro fungování grafiky, které pokud se načítají samostatně, je na každý obrázek třeba jeden request. Sprite tedy sdružuje všechny obrázky v~jenom velkém obrázku, který je pak z~LESS referencován pomocí mixinu. Pokud se tedy například ve složce \it{src/images} nachází soubor \it{ikona.png}, je vložen do spritu a~je možné jej referencovat kdekoliv v~LESS dokumentu, pokud includuje soubor \it{tmp/sprites.less} jednoduše pomocí mixinu a~proměnné: \it{.sprite(@ikona);}
+\begin{codeframe}
+  \begin{verbatim}
+var spriteConf={
+  base64: true,
+  name: 'sprite.png',
+  style: 'sprites.less',
+  cssPath: 'images/',
+  processor: 'less'
+};
+gulp.task('SPRITES', function() {
+  return gulp.src(["./src/images/**/*.png", "!./src/images/**/*_ns.png"])
+  .pipe(plumber())
+  .pipe(sprite(spriteConf))
+  .pipe(gulpif('*.png', gulp.dest("./assets/images")))
+  .pipe(gulpif('*.less', gulp.dest("./src/less")));
+});
+  \end{verbatim}
+\end{codeframe}
+
+\item[Templates] - Tento task se stará o~převod šablon ze zdrojových souborů. Možné je psát šablony jak v~HTML tak v~JADE. Další možností šablon je pak templateCache, kdy se html převede na javascript, spojí se do jednoho souboru a stáhnou aplikací při prvním načtení.
+% Stejně jako sprity, převod html šablon do jednoho javascriptu snižuje také značně počet requestů. Pokud je použite templateCache musí, ale~vývojář počítat stím, že veškeré zobrazování a~skrývání obsahu, např. z~důvodu oprávnění, musí být ošetřeno ve frontendu pomocí AngularJS. Nejedná se ale~o~velkou překážku a~v~případě potřeby může být část šablon ponechána v~html a~stáhnuta pomocí xhr requestu.
+\begin{codeframe}
+  \begin{verbatim}
+gulp.src(["./src/**/*.html"])
+.pipe(gulp.dest("./assets/partials"));
+
+gulp.src(["./src/**/*.jade"])
+.pipe(jade({
+    pretty:true,
+    debug:false
+}))
+.pipe(gulp.dest("./assets/partials"));
+  \end{verbatim}
+\end{codeframe}
+
+\item[Watch] - Watch pouze hlídá změny v~souborech, pokud se změní soubor, který~hlídá nebo přibide nový, který odpovídá jeho nastavení spustí nastavený task.
+\begin{codeframe}
+  \begin{verbatim}
+gulp.watch('src/**/*.coffee', ['browserify_dev']);
+gulp.watch(['!src/images/**/*_NS.png',
+  'src/images/**/*.png','src/**/*.less'], ['LESS_DEV']);
+gulp.watch('src/images/**/*{.ico,.svg,.gif,_NS.png}', ['images_dev']);
+gulp.watch(['src/**/*.html','src/**/*.jade'], ['templates']);
+  \end{verbatim}
+\end{codeframe}
+\end{description}
+
+Konečné řešení pro spojovaní souborů za účelem snížení počtu requestů by měl přinést chystaný protokol \b{HTTP 2.0}, který přinese multiplexování requestů a respons, lepší kompresi a~mnoho jiného.\cite{http2}
 
 \section{\upc{Nasazení aplikace (server,cloud)}}
 V~dnešní době, kdy jsou moderní cloudové služby, které umožňují s~minimální počáteční investicí spustit projek prakticky jakékoliv velikosti. Je velmi dobré zvážit cloudové nasazení buď samostatné databáze nebo většinou kompletního projektu. Samozřejmě záleží především na finanční situaci provozovatele naší služby, jejím aktuálním stavu a~návštěvnosti.\\
@@ -2528,6 +2662,7 @@ webovou adresu aplikace je pak možné získat po přihlášení na webu openshi
 \bibitem{bower} http://bower.io/
 \bibitem{BASHen}http://www.nodejs.cz/co-je-event-driven-architektura/. [e-kniha]
 \bibitem{sharding}http://docs.mongodb.org/manual/core/sharding/.
+\bibitem{http2} http://http2.github.io/http2-spec/index.html\#StreamsLayer
 \bibitem{MailingListVznikGITu}TORVALDS, Linus.{\it{ LKML.ORG - the Linux Kernel Mailing List Archive}} [online]. 2005-04-07 [cit. 2011-05-26]. Linus Torvalds: Re: Kernel SCM saga. Dostupné z~WWW: \href{http://lkml.org/lkml/2005/4/8/9}{http://lkml.org/lkml/2005/4/8/9}.
 \bibitem{GITWEB}CHACON, Scott. {\it{ Git}} [online]. 2005 [cit. 2011-05-26]. Git - Fast Version Control System. Dostupné z~WWW: \href{http://git-scm}{http://git-scm}
 \bibitem{GIThelpNastaveni}GitHub Inc.{\it{ Help.GitHub }}[online]. 2011 [cit. 2011-05-26]. Set Up Git (Linux). Dostupné z~WWW: \href{http://help.github.com/linux-set-up-git/}{http://help.github.com/linux-set-up-git/}.

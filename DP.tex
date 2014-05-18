@@ -405,10 +405,15 @@ Ve Zlíně &\hspace{9cm} .......................\\
 \section{\upc{Knihovní informační systém}}
 Informační systémy obecně se stávají velmi komplexním řešením pro kompletní vedení firem jakýchkoliv rozměrů, zajišťují širokou škálu služeb, od komunikace se zákazníky přes ekonomické systémy až po prodej a~tvorbu obsahu nebo pro evidenci skadu. Takové systémy jsou vyvíjeny většinou dlouhodobě na míru zákazníkovi a~rozvíjeny společně s~jeho růstem a~potřebám. Nebo sa také jedná o~různá spojení stávajících informačních systémů, která jsou často spravována separátně a~nenabízí přehled a~porovnání údajů jednotlivých částí.\\
 
-\subsection{Existující}
+\subsection{Existující informační systémy pro knihovny a kohkupectví}
 Velmi častou aplikací, která se používá v~české republice je kombinace účetního systému Pohoda \href{http://www.ucetni-systemy.cz/pohoda-standard/c-4468/}{http://www.ucetni-systemy.cz/pohoda-standard/c-4468/}, která obsahuje kompletní správu pro firmu včetně pokladen skladů a~účetnictví a~dokáže tato data synchronizovat s~některým s~e-shopů např. PrestaShop \href{http://www.prestashop.com/}{http://www.prestashop.com/}. E-comerce a~komunikace se zákazníkem je pak na e-shopu, který většinou slouží pro klasický prodej. Komunikace mezi zaměstnanci probíhá prostřednictvím e-mailů nebo IM a~komunikace se zákazníkem, buď pomocí e-mailů nebo "chatu" přímo v~okně prohlížeče.\\
 
 Další systémy jsou na tom podobně, co ovšem chybí je např. komunikace s~tvůrcem a~přehledu pro něj, jak se prodává jeho dílo. Nebo přímo rozhraní pro tvorbu knihy online.\\
+
+\subsection{Trendy v informačních systémech}
+Svět informačníčh systému se stále rychle vyvíjí, dříve byl vyspělý informační systém \it{DOSový} program, který se připojil na server, mnohdy ani to ne, a~obsluha jej ovládala klávesnicí. Dnes jsou požadavky na informační systémy mnohem větší a~zákazníci ve většině případů vyžadují dostupnost kdekoliv na světě pomocí webového prohlížeče v~mobilu nebo~tabletu.\cite{trendsIS}\\
+
+Dalším trendem jsou sociální sítě jako Facebook,LinkedIn,Twitter apd,… informační systémy v~dnešní době zahrnují podpodu pro sociální síťe. Ale nejedná se pouze o~dnes velmi populární přihlašování bez nutnosti \it{"registrace"}, ale~např. zkoumání povědomí o~značce nebo komunikaci se zákazníky pomocí sociálních sítí a~realtime chatu.\cite{trendsIS}\\
 
 \subsection{Proces schvalování knih}\label{sec:schvalovani}
 
@@ -446,9 +451,11 @@ Podmínky
       \begin{Verbatim}{frame=single}
 #coffeescript
 number = -42 if opposite
+#number je -42 pokud je oppsite true
 date = if friday then sue else jill
+#pokej je friday tak date je sue jinak jill
 
-#javascript
+#javascript - stejný kód
 if (opposite) {
   number = -42;
 }
@@ -456,7 +463,7 @@ date = friday ? sue : jill;
 \end{Verbatim} 
     \end{codeframe}
 
-Funkce
+Funkce není třeba psát složenými závorkami vše s indentací patří do funkce.
      \begin{codeframe} 
       \begin{Verbatim}{frame=single}
 #coffeescript
@@ -470,7 +477,7 @@ var square = function(x) {
 \end{Verbatim} 
     \end{codeframe}
 
-Objekty
+Objekty - objekty není třeba uzávírat do složených závorek.
      \begin{codeframe} 
       \begin{Verbatim}{frame=single}
 #coffeescript
@@ -489,7 +496,8 @@ var math = {
 };
 \end{Verbatim} 
     \end{codeframe}
-Testování existence proměnné
+
+Testování existence proměnné - otazník za promněnnou testuje její existanci a~pokud elvis existuje vyskocí alert.
      \begin{codeframe} 
       \begin{Verbatim}{frame=single}
 #coffeescript
@@ -502,25 +510,25 @@ if (typeof elvis !== "undefined" && elvis !== null) {
 \end{Verbatim} 
     \end{codeframe}
 
-     \begin{codeframe} 
-      \begin{Verbatim}{frame=single}
-#coffeescript
-number   = 42
-opposite = true
-
-#javascript
-var number = 42;
-var opposite = true;
-\end{Verbatim} 
-    \end{codeframe}
 Cykly
      \begin{codeframe} 
       \begin{Verbatim}{frame=single}
 #coffeescript
+eat =(food)->
+  console.log(food)
+
 foods = ['broccoli', 'spinach', 'chocolate']
 eat food for food in foods when food isnt 'chocolate'
+#eat(food) je zavolána pokud položka v poli není chocolate
+#Výstup:
+broccoli
+spinach
+
 
 #javascript
+var eat = function(food){
+  console.log(food);  
+}
 var food, foods, _i, _len;
 
 foods = ['broccoli', 'spinach', 'chocolate'];
@@ -534,20 +542,27 @@ for (_i = 0, _len = foods.length; _i < _len; _i++) {
 \end{Verbatim} 
     \end{codeframe}
 
-Třídy a dědičnost
+Třídy a dědičnost - jsou v CoffeScriptu velmi podobné standartu ES6 a~jsou přeloženy na javascriptové prototypy.
      \begin{codeframe} 
       \begin{Verbatim}{frame=single}
 #coffeescript
 class Animal
   constructor: (@name) ->
+    console.log @name
 
   move: (meters) ->
-    alert meters
+    console.log meters
 
 class Snake extends Animal
   move: ->
-    alert "Syčí..."
+    console.log "Syčí..."
     super 5
+slepis = new Snake("Slepíš")
+slepis.move()
+#Výstup
+Slepíš
+Syčí...
+5
 
 #javascript
 var Animal, Snake,
@@ -569,7 +584,7 @@ Animal = (function() {
   }
 
   Animal.prototype.move = function(meters) {
-    return alert(meters);
+    return console.log(meters);
   };
 
   return Animal;
@@ -584,7 +599,7 @@ Snake = (function(_super) {
   }
 
   Snake.prototype.move = function() {
-    alert("Syčí...");
+    console.log("Syčí...");
     return Snake.__super__.move.call(this, 5);
   };
 
@@ -596,8 +611,10 @@ Snake = (function(_super) {
     \end{codeframe}
 
 \subsection{Alternativy}
-Alternativ coffeescriptu respektive javascriptu, je hned několik mezi nejzajímavější patří především Type-script a DART. Oba razí trochu jinou ideologii a~jsou financovány softwarovými giganty Microsoftem a~Googlem. \b{Typescript} - je, co se ideologie týče, podobný více coffeescriptu, protože se~jedná také pouze o~transpiler, ale~s~tím rozdílem, že~nijak zvláštně neupravuje vzhled kódu nebo syntaxy jazyka, ale~přidává především datové typy, které javascript samotný nemá. Ovšem tato vlastnost je~následně ztrácena překladem do~javascriptu. Oproti tomu \b{DART} je~úplně nový jazyk určený pro běh v~prohlížeči, který má možnost kompilace do javascriptu. Momentálně není DART implementovám v~žádném z~majoritních prohlížečů, pouze v projektu dartium, což~je~fork projektu chromium určený speciálně pro běh DARTu. DART je velkým příslibem pro budoucnost vývoje webových aplikací.
+Alternativ coffeescriptu respektive javascriptu, je hned několik mezi nejzajímavější patří především Type-script a DART. Oba razí trochu jinou ideologii a~jsou financovány softwarovými giganty Microsoftem a~Googlem. \b{Typescript} - je, co se ideologie týče, podobný více coffeescriptu, protože se~jedná také pouze o~transpiler, ale~s~tím rozdílem, že~nijak zvláštně neupravuje vzhled kódu nebo syntaxy jazyka, ale~přidává především datové typy, které javascript samotný nemá. Ovšem tato vlastnost je~následně ztrácena překladem do~javascriptu.\cite{typeScript} Oproti tomu \b{DART} je~úplně nový jazyk určený pro běh v~prohlížeči, který má možnost kompilace do javascriptu. Momentálně není DART implementovám v~žádném z~majoritních prohlížečů, pouze v projektu dartium, což~je~fork projektu chromium určený speciálně pro běh DARTu. DART je velkým příslibem pro budoucnost vývoje webových aplikací.\cite{dart}
 
+\subsection{Browserify}
+TODO
 
 \section{\upc{MEAN}}
 
@@ -610,7 +627,7 @@ Alternativ coffeescriptu respektive javascriptu, je hned několik mezi nejzajím
 \caption[Logo MEAN]{Logo MEAN}
 \end{figure}
 
-Podobně jako kombinace Linux+Apache+MySQL+PHP získala svoji širove známou zkratku \b{LAMP}, je pro označení často užívané kompinace nástrojů MongoDB+ExpressJS+AngularJS+NodeJS využívána zkratka MEAN. Pro tuto kombinaci nástrojů byl od začátky designován celý projekt.\\
+Podobně jako kombinace Linux+Apache+MySQL+PHP získala svoji širove známou zkratku \b{LAMP}, je pro označení často užívané kompinace nástrojů MongoDB+ExpressJS+AngularJS+NodeJS využívána zkratka MEAN. Pro tuto kombinaci nástrojů byl od začátky designován celý projekt.\cite{mean}\\
 
 \section{\upc{NodeJS}}
 \begin{figure}[h]
@@ -621,10 +638,10 @@ Podobně jako kombinace Linux+Apache+MySQL+PHP získala svoji širove známou zk
 \end{center}
 \caption[Logo NodeJS]{Logo NodeJS}
 \end{figure}
-NodeJS je framework postavený na javascriptu a~enginu V8\footnote{V8 je javascript engine používaný ve webovém prohlížeči Chrome.} od společnosti Google. Jednou z~hlavních výhod nodejs je \b{event-driven} architektura a~vlastní balíčkovací systém \b{npm}.\\
+NodeJS je framework postavený na javascriptu a~enginu V8\footnote{V8 je javascript engine používaný ve webovém prohlížeči Chrome.} od společnosti Google. Jednou z~hlavních výhod nodejs je \b{event-driven} architektura a~vlastní balíčkovací systém \b{npm}.\cite{NodeJS}\\
 
 \subsection{Event-loop}
-Event-loop je jeden ze způšobů zpracování programu. Oproti více zažitým způsobům, kdy voláme funkce a~jejich návratové hodnoty posíláme do~dalších funkcí. V~JavaScriptu máme seznam eventů, které když se~stanou (v~prohlížeči dojde ke stisknutí tlačítka, na serveru dojde k příchodu HTTP požadavku atd.), tak se~zavolá nastavená obsluhující funkce (callback). V~zásadě tak můžeme nastavit callbacky na vstup z~terminálu, příchod dat na síťový port a~periodicky spouštěný event (pomocí setInterval) najednou a~to vše bez vláken či~řešení synchronizace. Pokud pak někdo bude psát do~terminálu a~zároveň dojde k~připojení přes síť, zpracuje se nejdříve jeden event, pak druhý, atd...\cite{nodejsEventArch}
+Event-loop je jeden ze způšobů zpracování programu. Oproti více zažitým způsobům, kdy voláme funkce a~jejich návratové hodnoty posíláme do~dalších funkcí. V~JavaScriptu máme seznam eventů, které když se~stanou (v~prohlížeči dojde ke stisknutí tlačítka, na serveru dojde k příchodu HTTP požadavku atd.), tak se~zavolá nastavená obsluhující funkce (callback). V~zásadě tak můžeme nastavit callbacky na vstup z~terminálu, příchod dat na síťový port a~periodicky spouštěný event (pomocí setInterval) najednou a~to vše bez vláken či~řešení synchronizace. Pokud pak někdo bude psát do~terminálu a~zároveň dojde k~připojení přes síť, zpracuje se nejdříve jeden event, pak druhý, atd...\cite{nodejsEventArch}\cite{NodeJS}
 \begin{figure}[h]
 \begin{center}$
 \begin{array}{c}
@@ -635,7 +652,7 @@ Event-loop je jeden ze způšobů zpracování programu. Oproti více zažitým 
 \end{figure}
 
 \subsection{Balíčkovací systém NPM}
-Zejména v~posledních letech začali být velmi populární balíčkovací systémy pro různé programovací jazyky nebo frameworky inspirované balíčkovacími systémy z~operačního systému Linux respektive z~různých distribucí OS Linux. Vše začal jazyk Ruby a~především framework Ruby On Rails se~systémem tzv. Gemů. PHP dostalo balíčkovací systémy composer (aplikační moduly) a~pecl (systémové moduly). Python má pip atd,... NodeJS obsahuje svůj vlastní balíčkovací systém NPM (Node Package Manager). Disponuje velmi jenoduchům ovládáním a~přináší programátorů řešení závislostí jejich aplikací a~knihoven napříč operačními systémy.\\
+Zejména v~posledních letech začali být velmi populární balíčkovací systémy pro různé programovací jazyky nebo frameworky inspirované balíčkovacími systémy z~operačního systému Linux respektive z~různých distribucí OS Linux. Vše začal jazyk Ruby a~především framework Ruby On Rails se~systémem tzv. Gemů. PHP dostalo balíčkovací systémy composer (aplikační moduly) a~pecl (systémové moduly). Python má pip atd,... NodeJS obsahuje svůj vlastní balíčkovací systém NPM (Node Package Manager). Disponuje velmi jenoduchům ovládáním a~přináší programátorů řešení závislostí jejich aplikací a~knihoven napříč operačními systémy.\cite{NodeJS}\\
 
 Důležitým prvkem je konfigurační soubor \it{package.json}, obsahuje nejen informace o~závislostech programu, ale také třeba autora, verzi, popis, repozitář a~mnoho dalších údajů využívaných dalšími moduly aplikace.\\
 
@@ -671,6 +688,8 @@ Ukázkový package.json
 }
 \end{Verbatim} 
     \end{codeframe}
+Ze souboru můžeme vyčíst, že jméno aplikace je "moje-aplikace", že se nachází ve verzi "0.0.1", jejími závislostmi jsou "coffee-script,express a mongoose", vývojovými závislostmi pak "angular a angular-ui-router", k běhu potřebuje nodejs ve verzi 0.8.0 a~vyšší. Modul browserify používá transformace: "coffeeify, brfs a envify" a~na závěr jsou dekplarované scripty.
+
 
 NPM také obsahuje interaktivný shell pro vytváření nových projektů, který vytvoří package.json za uživatele. Nově instalované moduly jsou při přidání přepínače \it{--save} nebo \it{--save-dev} přidávány také automaticky.\\
 
@@ -693,7 +712,7 @@ ExpressJS je webový framework inspirovaný webovým frameworkem Synatra napsan�
 \caption[Logo ExpressJS]{Logo ExpressJS}
 \end{figure}
 
-Express je ve stylu Synatra designován jako velmi jednoduchý a~obsahuje tak velmi malé množství funkcí, které se rozšiřuje pluginy a~knihovnami. Express tak umí především zpracovávat routy (url cesty), html požádavky (POST,GET,PUT,PATCH,OPTION) a~tělo requestů. Umí také zpracovávat a~poskytovat statické soubory a cookies.\\
+Express je ve stylu Synatra designován jako velmi jednoduchý a~obsahuje tak velmi malé množství funkcí, které se rozšiřuje pluginy a~knihovnami. Express tak umí především zpracovávat routy (url cesty), html požádavky (POST,GET,PUT,PATCH,OPTION) a~tělo requestů. Umí také zpracovávat a~poskytovat statické soubory a cookies.\cite{expressjs}\\
 
 Ukázka velmi jednoduché express aplikace:
      \begin{codeframe} 
@@ -701,31 +720,30 @@ Ukázka velmi jednoduché express aplikace:
 express = require 'express'
 server = express()
 port = 3000;
-router = require("./routes")
 
-app.get "/partials/:partial", (req, res, next) ->
-  res.render "assets/partials/#{req.params.partial}"
+app.get "/", (req, res, next)->
+  res.render "views/root"
 
-app.get "/", router.store
-app.get "/editor", router.editor
+app.get "/hello", (req, res, next) ->
+  res.send('world')
 
 app.listen port, ->
-  onsole.log("Listening on #{port})
+  console.log("Listening on #{port})
 \end{Verbatim} 
     \end{codeframe}
+Pos spuštění kódu se vytvoří http server na portu 3000, který má dvě definované routy: \b{/} - root aplikace vrátí soubor \it{views/root.html} a \b{/hello}, který vrátí řetězec "world".
 
 \subsection{Mongoose ODM}
 V posledních letech se stali velmi populární ORM frameworky nad MySQL databází jako je Doctrine. Pro MongoDB databázi v~prostředí NodeJS je velmi populární ODM framework Mongoose. V~MongoDB databázi neexistuje schéma jako je tomu u~SQL databází jako je MySQL. Mongoose přináší podporu pro databázové schémata validaci a~virtuální položky funkce pro práci se schématem a~rozsiřitelné API. \\
 
 Jednoduché schéma v Mongoose:
+
      \begin{codeframe} 
       \begin{Verbatim}{frame=single}
 mongoose = require 'mongoose'
 Schema = mongoose.Schema
 
 User = new Schema
-  _id:
-    type: String,
   email:
     type: String
     required: true
@@ -736,6 +754,7 @@ User = new Schema
     required:false
   address:
     city: String
+    state: String
   buyed_books:
     [
       type: Schema.Types.ObjectId
@@ -751,6 +770,159 @@ User = new Schema
 module.exports = mongoose.model 'User', User
 \end{Verbatim} 
     \end{codeframe}
+Schéma obsahuje teké definované typy objektů a~jejich validaci. Konkrétně toto schéma uživatele má objekty: \b{email-} indexovaný, unikátní a~povinný, \b{name-} jméno-řetězec, \b{address-} který má vnořený objekt, který~obsahuje město a~stát, \b{buyed\_books-}pole referencí na knihy, které~uživatel koupil, \b{update\_at,created\_at-}data vytvoření a~poslední úpravy uživatele.
+
+\subsection{HapiJS (HTTP API)}
+Pro nodeJS existuje opravdu obrovské množství nejrůznějších frameworků. Framework použitý pro tvorbu tohoto projektu se jmenuje \b{HapiJS} \href{http://spumko.github.io/}{http://spumko.github.io/}.\\
+
+Jednáse o~jednoduše konfigurovatelný framework s~podporou validací, cachování, autentizace atd. Zaměřuje se na psaní znovupoužitelného aplikačního kódu a~eliminuje zdlouhavé vytváření infrastruktury.\cite{hapiJS}\\
+
+Ukázka vytvoření základního serveru s~jednou routou "/":
+
+     \begin{codeframe} 
+      \begin{Verbatim}{frame=single}
+Hapi = require("hapi")
+
+# Vytvoří http server
+server = Hapi.createServer("localhost", 8000)
+
+# Root route vrátí text "hello word"
+server.route
+  method: "GET"
+  path: "/"
+  config:
+    handler: (request, reply) ->
+      reply "hello word"
+
+# Spustí http server
+server.start ->
+  console.log "Server started at port " + server.info.port
+  return
+\end{Verbatim} 
+    \end{codeframe}
+
+Hapi jak už bylo řečeno Hapi obsahuje spoustu build-in\footnote{Build-in - Označuje funkcionalitu, která je již součástí} funkcionality, která ulehčuje práci programátorů a~usnadňuje rozdělení a~znovupoužitelnost aplikace. Jsou jimi např.:\\
+
+\subsubsection{Error handler}
+Hapi obsahuje build-in funkci pro vyvolání chybových odpovědí pomocí modulu "boom". Následující vyvolá HTTP vyjímku se stavovým kódem "499" a~zprávou špatný dotaz.\cite{hapiJSDOC}
+
+     \begin{codeframe} 
+      \begin{Verbatim}{frame=single}
+(request, reply) ->
+  error = Hapi.error.badRequest("Špatný dotaz")
+  error.output.statusCode = 499
+  error.reformat()
+  error.output.payload.custom = "abc_123"
+  reply error
+\end{Verbatim} 
+    \end{codeframe}
+
+\subsubsection{Pack}
+Pack je funkcionalita, která umožňuje sdružování množství serverů do jedné logické jednotky. Tokový pack může sdruzovat několik serverů, které~mohou mít vlastní pluginy.\cite{hapiJSDOC}
+     \begin{codeframe} 
+      \begin{Verbatim}{frame=single}
+Hapi = require("hapi")
+pack = new Hapi.Pack()
+pack.server 8000,
+  labels: ["web"]
+
+pack.server 8001,
+  labels: ["admin"]
+\end{Verbatim} 
+    \end{codeframe}
+Vytvoření dvou serverů "web" a "admin"
+
+\subsubsection{Composer}
+Composer slouží k~jednoduché konfiguraci Packu v~jenom jediném objektu včetně registrace pluginů\cite{hapiJSDOC}.
+     \begin{codeframe} 
+      \begin{Verbatim}{frame=single}
+Hapi = require("hapi")
+manifest =
+  pack:
+    cache: "catbox-memory"
+  servers: [
+    {
+      port: 8000
+      options:
+        labels: ["web"]
+    }
+    {
+      host: "localhost"
+      port: 8001
+      options:
+        labels: ["admin"]
+    }
+  ]
+  plugins:
+    yar:
+      cookieOptions:
+        password: "secret"
+composer = new Hapi.Composer(manifest)
+\end{Verbatim} 
+    \end{codeframe}
+Vytvoření dvou serverů "web" a "admin" s~pluginem yar a~jeho nastavením.
+
+\subsubsection{Plugin}
+Plugin je asi to nejzajímavější co HapiJS přináší. Plugin dokáže nést nějakou funkcionalitu, jako je zpracování requestu, nebo vlastní logiku. Plugin pomáhá rozdělit aplikaci na malé čášti, které mohou mít vlastní routy, závislosti, modely, logiku apd,... V různých kombinacích tak aby byli použitelné ve různých prostředích (development, testování, produkce).\cite{hapiJSDOC}
+\begin{codeframe}
+  \begin{Verbatim}
+Hoek = require("hoek")
+internals = defaults:
+  version: "/version"
+
+internals.version = 0.1
+exports.register = (plugin, options, next) ->
+  settings = Hoek.applyToDefaults(internals.defaults, options)
+  if settings.version
+    plugin.route
+      method: "GET"
+      path: settings.version
+      handler: (request, reply) ->
+        reply internals.version
+        return
+
+  listPlugins = (server) ->
+    plugins = []
+    Object.keys(server.pack.list).forEach (name) ->
+      item = server.pack.list[name]
+      plugins.push
+        name: item.name
+        version: item.version
+    plugins
+
+  plugin.expose "plugins", listPlugins
+  next()
+\end{Verbatim}
+  \end{codeframe}
+Jednoduchá ukázka pluginu, který přidává routu "/version", která vrátí jeho verzi a~metodu listPlugins, která vypíše všechny pluginy.
+
+\subsubsection{Cyklus requestu}
+Každý příchozí request musí projít sérií předefinovaných kroků spolu s~dalšími kroky přidanými programátorem.
+Each incoming request passes through a pre-defined set of steps, along with optional extensions\cite{hapiJSDOC}:
+\begin{description}
+\item['onRequest'] do objektu procházejícího tímto budem jsou přidány metody "request.setUrl(url)" a~"request.setMethod(verb)". Tyto metody mají vliv na routování a~mohou být využity pro přepsání pravidel routování. Router není ještě inicializován. Jedná se o~bod, kterému můžeme přidat vlastní metody a~změnit tak chování aplikace.
+\item[Procházení rout pomocí request path]
+\item[Parsování cookies]
+\item['onPreAuth'] další rozšiřující, bod, kterým je možné aplikaci rozšířit
+\item[Authenticate request]
+\item[Čtení a parsování payload]
+\item[Authenticate request payload]
+\item['onPostAuth'] další rozšiřující, bod, kterým je možné aplikaci rozšířit
+\item[Validace parametrů cesty]
+\item[Zpracování query (JSONP)]
+\item[Validace query]
+\item[Validace payload]
+\item['onPreHandler'] další rozšiřující, bod, kterým je možné aplikaci rozšířit
+\item[Přednastavení routeru]
+\item[Router]
+\item['onPostHandler'] další rozšiřující, bod, kterým je možné aplikaci rozšířit. V tomto kroce může býť modifikována odpověď serveru.
+\item[Validace payload odpovědi]
+\item['onPreResponse'] další rozšiřující, bod, kterým je možné aplikaci rozšířit
+\item[Odeslání odpovědi] (může vyvolat 'internalError')
+\item[Emits 'response' event]
+\item[Emits 'tail' event]
+\end{description}
+
 
 \section{\upc{MongoDB}}
 \begin{figure}[h]
@@ -782,6 +954,7 @@ db.users.insert(
   })
 \end{Verbatim} 
     \end{codeframe}
+Vytvoří záznam v~kolekci uživatelé se jménem "Franta", e-mailem "franta@franta.cz" a~adresou "zlín".
    
 Hlednání:   
      \begin{codeframe} 
@@ -806,11 +979,12 @@ db.users.update(
     _id: ObjectId("4b76ef5780b71853fe6c89b6")
   }, {
     $set: {
-      email: "franta@seznam.cz"
+      email: "franta2@seznam.cz"
     }
   })  
 \end{Verbatim} 
     \end{codeframe}
+provede update uživatele id 4b76ef5780b71853fe6c89b6 a~zmnění jeho email na "franta2@seznam.cz"
 
 Mazání:
 
@@ -819,22 +993,24 @@ Mazání:
 db.users.remove({name: "Franta"})
 \end{Verbatim} 
     \end{codeframe}
+smaže všechny uživatele se jménem "Franta"
 
 reference:
      \begin{codeframe} 
       \begin{Verbatim}{frame=single}
-#přidáme uživateli knihu
+#přidáme uživateli koupenou knihu
 db.users.update(
   {
     _id: ObjectId("4b76ef5780b71853fe6c89b6")
   }, {
     $push: {
-      books: new DBRef("books", ObjectId("4b7b1d6bb345126b62fb2230"))
+      buyed_books: new DBRef("books", ObjectId("4b7b1d6bb345126b62fb2230"))
     }
   })
 
 #vyhledáme uživatele
 db.users.findOne({_id: ObjectId("4b76ef5780b71853fe6c89b6")})
+#výstup
 {
   "_id" : ObjectId("4b76ef5780b71853fe6c89b6"),
   "name":"Franta",
@@ -850,7 +1026,9 @@ db.users.findOne({_id: ObjectId("4b76ef5780b71853fe6c89b6")})
   }
 }
 #získáme knihy uživatele
-db.users.findOne().books.fetch()
+db.users.findOne({_id: ObjectId("4b76ef5780b71853fe6c89b6")}).books.fetch()
+#výstup je stejný jako v přechozím případě jen v poli books
+# se místo reference oběví objekt konkrétní khiny.
 \end{Verbatim} 
     \end{codeframe}
 
@@ -968,6 +1146,7 @@ phonecatApp.config [
 ]
 \end{Verbatim} 
     \end{codeframe}
+Zde jsou nastaveny routy \b{/phones} , která má controller: "PhoneListCtrl" a~template: partials/phone-list.html a~\b{/phones/:id}, která slouží pro získání jednoho telefonu. Pokud není routa v~seznamu, je přesměrováno na routu "/phones"
 
 Ukázka ui-router
      \begin{codeframe} 
@@ -987,7 +1166,7 @@ phonecatApp.config [
 ]
 \end{Verbatim} 
     \end{codeframe}
-Z ukázky je vidět, že stavy v~ui-routeru, jsou hierarchycké a lépe se v~nich orientuje.\\
+Stejný případ jako u normálního angular-routery, ale tentokrát s~ui-routerem. Z ukázky je vidět, že stavy v~ui-routeru, jsou hierarchycké a lépe se v~nich orientuje.\\
 
 \subsection{Scope}
 Scope je základním stavebním kamenen AngularJS aplikací. Scope reprezentují model aplikace, jsou také místem kde dochází k~vyhodnocení výrazů $\{\{ \}\}$, definujeme zde bussines logic aplikace metody našich controllerů a~vlastnosti views. Scope svazuje controller a~view, těsně před tím než se view zobrazí uživateli, je template prolinkován se scope a~DOM nastaven tak aby o~všech změnách informaval AngularJS.\cite{ngBOOK}\\
@@ -1017,11 +1196,12 @@ app.controller "Controller", ["$scope","api",($scope,api) ->
 Jmeno: Franta
 \end{Verbatim} 
     \end{codeframe}
+Jenoduché vypsání jména uživate, které je získáno z~factory "api" funkcí "getUser()".
 
 \subsection{Directive}
-Directivy jsou místem kde je v~AngularJS zpracováván DOM. AngularJS je plný directiv\footnote{seznam build-in directiv pro AngularJS je~k~dispozici v~dokumentaci: \href{https://docs.angularjs.org/api/ng/directive}{https://docs.angularjs.org/api/ng/directive}}, už pro vyvoření AngularJS aplikace je třeba využít directivu \it{ng-app}.\\
+Directivy jsou místem kde je v~AngularJS zpracováván DOM. AngularJS je plný directiv\footnote{seznam build-in directiv pro AngularJS je~k~dispozici v~dokumentaci: \href{https://docs.angularjs.org/api/ng/directive}{https://docs.angularjs.org/api/ng/directive}}, už pro vyvoření AngularJS aplikace je třeba využít directivu \it{ng-app}.\cite{ngBOOK}\\
 
-Zpracování directivy má 3~fáze, \it{compile, link a controller}, které jsou vykonány v~tomto pořadí. Directivu můžeme bindovat na DOM element několik způsoby:
+Zpracování directivy má 3~fáze, \it{compile, link a controller}, které jsou vykonány v~tomto pořadí. Directivu můžeme bindovat na DOM element několik způsoby\cite{ngBOOK}:
 \begin{description}
 \item[E] Element <mojeDirectiva></directiva>
 \item[A] Atribut <div mojeDirectiva=""~></div>
@@ -1029,7 +1209,7 @@ Zpracování directivy má 3~fáze, \it{compile, link a controller}, které jsou
 \item[M] Komentář <!-- directive: mojeDirectiva exp -->
  \end{description}
 
- Diractiva může mít vlastní HTML template, vlastní scope,controller, můžeme určit prioritu jejího vykonání, apd... Ve všech ohledech je directiva velmi dobře znovuvyužitelný komponent aplikace.\\
+ Diractiva může mít vlastní HTML template, vlastní scope,controller, můžeme určit prioritu jejího vykonání, apd... Ve všech ohledech je directiva velmi dobře znovuvyužitelný komponent aplikace.\cite{ngBOOK}\\
 
 Ukázka directivy:
      \begin{codeframe} 
@@ -1050,6 +1230,7 @@ VIEW:
 <loading></loading>
 \end{Verbatim} 
     \end{codeframe}
+Directivatu "loading" je možné "bindovat" na DOM element s~názvem "loading". Pokud directiva obdrží "\$broadcast" "LOADING", zobrazí se DOM element s~načítáním a~pokud obdrží "\$broadcast" LOADING\_END skryje načítání.\cite{ngBOOK}
 
 \subsection{Factory}
 Obecně lze říci, že service providery, jakým je i~factory, jsou k~tomu aby pro všechny controllery aplikace poskytovali stejné metody a~data, po dobu exsitence aplikace.\\
@@ -1070,9 +1251,10 @@ app.factory "random", ->
     array[Math.floor(Math.random() * array.length)]
 \end{Verbatim} 
     \end{codeframe}
+Factory v~příkladu je spíše takový "hellper"\footnote{hellper - pomocná funkce,třída nebo knihovna}. Má tři metody, které vrací buď náhodné číslo, náhodné číslo mezi dvěma hodnotami nebo~náhodný prvek pole.
 
 \subsection{Filter}
-Filter jak už název napovídá je určen pro filtraci dat. Je možné ho použít formou service v~controlleru nebo přímo ve view pomocí "roury" \it{\{\{ data | filter \}\}}. AngularJS má několik buildin filtrů jako je \it{date, lowercase, ...}.
+Filter jak už název napovídá je určen pro filtraci dat. Je možné ho použít formou service v~controlleru nebo přímo ve view pomocí "roury" \it{\{\{ data | filter \}\}}. AngularJS má několik buildin filtrů jako je \it{date, lowercase, ...}.\cite{ngBOOK}
 
 Ale je možné si nadefinovat také vlastní filtry, následující filter děla jednoduchou věc a~to, že~drží danný počet míst čísla tak, že~před číslo doplňuje nuly:
      \begin{codeframe} 
@@ -1102,21 +1284,15 @@ $scope.minutes = 1
 \subsection{Animace}
 Od verze 1.2 disponuje AngularJS přepracovanými animacemi v~samostatném modulu \it{angular-animate}. Definovat animace je díky tomuto modulu velmi jednoduché snadno pochopitelné a~velmi příjemné. K~animacím jsou používány běžné css animace, které jsou definovány pomocí css selectorů. \cite{angularAnimation}\\
 
-Většina AngularJS directivy jako \it{ngRepeat,ngShow, apd...} má vlastní hooky, které jsou spouštěny v určitých fázích cyklu directivy.\\
+Většina AngularJS directivy jako \it{ngRepeat,ngShow, apd...} má vlastní hooky, které jsou spouštěny v určitých fázích cyklu directivy.\cite{ngBOOK}\\
 
-Ukázka ng-show animace:
+Ukázka ng-hide animace:
 \begin{codeframe}
   \begin{verbatim}
 #DOM
-<div class="check anim" ng-show="checked">
+<div class="anim" ng-hide="checked" ng-click="checked=false">Hide<div>
 
 #CSS
-anim {
-  padding:10px;
-  border:1px solid black;
-  background:white;
-}
-
 .anim.ng-hide-add, .anim.ng-hide-remove {
   transition:all linear 0.5s;
   display:block!important;
@@ -1133,6 +1309,7 @@ anim {
 }
   \end{verbatim}
 \end{codeframe}
+tato animeca je určena pro directivu "ngShow". Z~kódu lze vyčíst, že~při přidaní a~odebrání elementu, repspektive při přidání třídy "ng-hide-add" a "ng-hide-remove", se~provede lineární animace trvající 0.5s a~po tuto dobu bude trvat přechod z~průhlednosti 1 do průhlednosti 0. Tak může být docíleno zmizení jakéhokoliv DOM elementu.\cite{ngBOOK}
 
 Další informace jak vytvářet vlastní animace je možné se dozvědět v~dokumentaci projektu: \href{https://docs.angularjs.org/guide/animations}{https://docs.angularjs.org/guide/animations}\\
 
@@ -1177,6 +1354,13 @@ jednoduchá ukázka less:
 }
   \end{verbatim}
 \end{codeframe}
+
+\subsection{Twitter bootsrap}
+TODO:
+
+\subsection{LessHat}
+TODO:
+
 
 \section{\upc{JADE}}
 \begin{figure}[h]
@@ -1282,7 +1466,8 @@ gulp.task('LESS_DEV', ["SPRITES_DEV"], function() {
         .pipe(livereload())
 });
   \end{verbatim}
-\end{codeframe}\cite{jade}
+\end{codeframe}
+Postupně jsou provedeny tyto kroky: \b{src} - vybere soubory a~vytvoří stream, \b{debug} - spustí ladění scriptu, \b{plumber}-zajistí, že~při chybě nedojde k~pádu gulpu, \b{less} - přeloží less zdrojové soubory, \b{autoprefixe} - vyřeší vendor prefixy prohlížečů na základě konfiguračního objektu, \b{dest} - uloží stream do souboru, \b{livereload} - obnoví livereload server.\cite{jade}
 
 \section{\upc{Systém pro správu verzí git}}
 Projekt git byl založen v~roce 2005 Linusem Torvaldsem, původně pro vývoj jádra Linuxu, a~jsou do něj vloženy zkušenosti, které Linus získal při vedení rozsáhlého projektu Linuxového jádra.~\cite{MailingListVznikGITu}\\
@@ -1397,6 +1582,10 @@ git branch -D <název větve> #smaže větev
 \end{Verbatim} 
     \end{codeframe}
 Pokud souběžně vznikají změny ve větvi hlavní i~nové větvi a~chceme provést příkazy jako \it{rebase, pull . <větev>} nebo \it{merge} mohou nastat konflikty ve změnách, které je třeba vyřešit (git některé konflikty řeší sám, ale nedokáže všechno). V takovém případě přepne git aktuální větev do speciálního režimu a~předá uživateli informace k~vyřešení těchto konfliktů.~\cite{GITmanualMerge}
+
+\section{\upc{TeX}}
+TODO:
+
 %
 %DALŠÍ
 %
@@ -1457,13 +1646,13 @@ Pokud souběžně vznikají změny ve větvi hlavní i~nové větvi a~chceme pro
 %\sectionV{Nadpis}
 %\subsection{Podnadpis}
 %********************************* Projektová část ************************************
-\part{Projektová část}
+\part{Praktická část}
 \section{\upc{Funkcionalita}}
 Vzhledem k~modulárnosti a~škálovatelnosti aplikace lze na funkcionalitu nahlížet ze dvou pohledů.\\
 
 Prvním je pohled z~hlediska modulárnosti aplikace jako takové a~její škálovatelnosti a~druhým pohled z~hlediska uživateského.\\
 
-\subsection{Modulární aplikační}
+\subsection{Modulární aplikační funkcionalita}
 V tomto pohledu, lze dělit funkcionalitu na Databázi \odkazNaKapitolu{sec:db}, Backend \odkazNaKapitolu{sec:backend} a~Frontend \odkazNaKapitolu{sec:frontend}.
 
 \begin{figure}[h]
@@ -1481,7 +1670,7 @@ Backend zajišťuje NodeJS aplikace, kterou lze dělit na části podle funkcion
 
 Frontend je pak rozdělen do několik single-page aplikací aby se klientovi, který přijde na e-shop nestahoval zbytečně např. také editor pro tvorbu knih, nebo části aplikace, které by neměly být přístupné. Frontend používá framework AngularJS a~jeho kód je plně vykonáván na klientské stanici, tedy v~prohlížeči. Data se stahují pomocí asynchroních javascriptových requestů.\\
 
-\subsection{Uživatelská}
+\subsection{Uživatelská funkcionalita}
 Uživatelská funkcionalita spočívá pouze na frontendu. Ten zajištůje, že uživatel vidí a~kupuje knihy.\\
 
 Prakticky je frontend rozdělen to těchto single-page aplikací, kde každá znich poskytuje určitou funkcionalitu pro určité spektrum uživatelů.\\
@@ -2344,15 +2533,34 @@ Zabezpečení MongoDB databáze je velmi jednoduché a~lze jej sprovoznit pomoc�
 O část aplikace na straně serveru se stará NodeJS server postavený frameworku express spolu ODM mongoose pro práci s~databází. 
 
 \subsection{Struktura}
+\begin{figure}[h]
+\begin{center}$
+\begin{array}{c}
+\includegraphics[scale=0.5]{./img/grap_backend.png}
+\end{array}$
+\end{center}
+\caption[Diagram API]{Diagram prostupu struktury backendu aplikace.}
+\end{figure}
+
 \subsection{API}
+\subsubsection{/api/v1/me}
+\subsubsection{/api/v1/book}
+\subsubsection{/api/v1/user}
+\subsubsection{/api/v1/branch}
+\subsubsection{/api/v1/order}
+\subsubsection{/api/v1/project}
+\subsubsection{/api/v1/page}
+\subsubsection{/api/v1/log}
+
 \subsection{Zabezpečení}
 \subsection{Přihlášení a soukromí uživatelů}
-\subsection{ACL}
+\subsection{Ochrany proti útoků}
+\subsubsection{JSONP}
+\subsubsection{XSS}
+\subsubsection{CSRF}
 
 \section{\upc{Frontend}}\label{sec:frontend}
-\subsection{Struktura}
 \subsection{Komponenty}
-
 \subsubsection{Store (e-shop)}\label{sec:store}
 \subsubsection{Create (správa vlastních knih)}\label{sec:create}
 \subsubsection{Edit (editor knih)}\label{sec:edit}
@@ -2606,6 +2814,32 @@ end script
 
 JenkinsCI pak jenom zkopíruje kód z~GIT repozitáře a~zapíše náhodný řetězec do restart souboru, který zkontroluje monit a~restartuje upstart script.
 
+Ještě je důležité zmínit, že nodejs běží v~jenom vlákně, pokud tedy chceme využít více jader procesoru musíme spustit více instancí a~balancovat mezi nimi, jak už bylo i~zmíněno, nebo~můžeme použít nodeJS cluster, který vytvoří proxyserver a~o~balancování se stará sám.\cite{prezNodeHuge}
+\begin{codeframe}
+  \begin{verbatim}
+cluster = require("cluster")
+http = require("http")
+numCPUs = require("os").cpus().length
+if cluster.isMaster
+  i = 0
+  while i < numCPUs
+    cluster.fork()
+    i++
+  cluster.on "exit", (worker, code, signal) ->
+    console.log "worker " + worker.process.pid + " died"
+    return
+else
+  # HTTP SERVER
+  http.createServer((req, res) ->
+    res.writeHead 200
+    res.end "hello world\n"
+    return
+  ).listen 8000
+  \end{verbatim}
+\end{codeframe}
+Kód vytvoří nodejs server na portu 8000 a~pro každé jádro procesoru vytvoří jeden worker.\cite{prezNodeHuge}
+
+
 \subsubsection{Cloud}
 V oblasti cloudu je možností také nepočítaně. Mezi nejznámější služby patří např. průkopník v~této oblasti Heroku (\href{http://heroku.com}{http://heroku.com}), NodeJitsu \href{https://www.nodejitsu.com/}{https://www.nodejitsu.com/} nebo relativně nová služba od společnosti Red Hat Openshift \href{https://www.openshift.com/}{https://www.openshift.com/}. Všechny služby jsou velice jednoduché na používání nabízejí jak webové rozhraní pro vytváření aplikací tak jednoduchý deployment pomocí příkazové řádky. Navíc všechny poskytují zároveň MongoDB hosting takže není třeba při startu aplikace využívat externí cloudové služby pro databázi.\\
 
@@ -2650,16 +2884,27 @@ webovou adresu aplikace je pak možné získat po přihlášení na webu openshi
 \newpage
 %********************************* Seznam Literatury ************************************
 \seznamlit{
+\bibitem{ngBOOK}Ng-book: The Complete Book on AngularJS [online]. Fullstack io, 2013 [cit. 2014-02-01]. ISBN 978-0991344604. Dostupné z: https://www.ng-book.com/. [e-kniha] 
+\bibitem{NodeJS}Mastering Node.js [online]. Packt Publishing, 2013 [cit. 2014-02-01]. ISBN 978-1782166320. Dostupné z: http://visionmedia.github.io/masteringnode/. 
+\bibitem{selfPublish}POYNTER, Dan. Dan Poynters self-publishing manual: how to write, print and sell your own book. 15th ed., completely rev. Santa Barbara, Calif.: Para Pub., 2006, 463 p. ISBN 978-156-8601-342.
+\bibitem{htmlDesign}DUCKETT, Jon. HTML: design and build websites. Indianapolis, IN: Wiley, c2011, 490 p. ISBN 11-180-0818-9.
+\bibitem{TeX}OETIKER, Tobias, Hubert PARTL, Irene HYNA a Elisabeth SCHLEGL. The Not So Short Introduction to LATEX [online]. [cit. 2014-02-01]. Dostupné z: http://www.ctan.org/tex-archive/info/lshort/english/.
 \bibitem{nodejsEventArch}http://www.nodejs.cz/co-je-event-driven-architektura/. [e-kniha] 
 \bibitem{expressjs}http://expressjs.com/. [e-kniha] 
+\bibitem{trendsIS}http://www.businessit.cz/cz/analytici-informacni-systemy-cloud-socialni-crm-business-intelligence.php
 \bibitem{abcLinuxuSerialMongo}http://www.abclinuxu.cz/clanky/programovani/lehky-uvod-do-mongodb. [e-kniha] 
 \bibitem{angularGITHUB}https://github.com/angular/angular.js. [e-kniha] 
 \bibitem{angularJSFolders}http://cliffmeyers.com/blog/2013/4/21/code-organization-angularjs-javascript. [e-kniha] 
-\bibitem{ngBOOK}NGBOOK. [e-kniha] 
 \bibitem{angularAnimation} https://docs.angularjs.org/guide/animations [e]
 \bibitem{lesscss} http://lesscss.org/ [e]
 \bibitem{jade} http://jade-lang.com/
 \bibitem{bower} http://bower.io/
+\bibitem{hapiJS}http://spumko.github.io/
+\bibitem{hapiJSDOC}https://github.com/spumko/hapi/blob/master/docs/Reference.md
+\bibitem{mean} http://blog.mongodb.org/post/49262866911/the-mean-stack-mongodb-expressjs-angularjs-and
+\bibitem{dart} https://www.dartlang.org/
+\bibitem{prezNodeHuge}http://www.slideshare.net/OnModulus/planningforthehorizontal-scalingnode-js-18572644
+\bibitem{typeScript} http://www.typescriptlang.org/Tutorial
 \bibitem{BASHen}http://www.nodejs.cz/co-je-event-driven-architektura/. [e-kniha]
 \bibitem{sharding}http://docs.mongodb.org/manual/core/sharding/.
 \bibitem{http2} http://http2.github.io/http2-spec/index.html\#StreamsLayer

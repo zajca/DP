@@ -407,12 +407,10 @@ Informační systémy obecně se stávají velmi komplexním řešením pro komp
 
 \subsection{Existující informační systémy pro knihovny a kohkupectví}
 Velmi častou aplikací, která se používá v~české republice je kombinace účetního systému Pohoda \href{http://www.ucetni-systemy.cz/pohoda-standard/c-4468/}{http://www.ucetni-systemy.cz/pohoda-standard/c-4468/}, která obsahuje kompletní správu pro firmu včetně pokladen skladů a~účetnictví a~dokáže tato data synchronizovat s~některým s~e-shopů např. PrestaShop \href{http://www.prestashop.com/}{http://www.prestashop.com/}. E-comerce a~komunikace se zákazníkem je pak na e-shopu, který většinou slouží pro klasický prodej. Komunikace mezi zaměstnanci probíhá prostřednictvím e-mailů nebo IM a~komunikace se zákazníkem, buď pomocí e-mailů nebo "chatu" přímo v~okně prohlížeče.\\
-
 Další systémy jsou na tom podobně, co ovšem chybí je např. komunikace s~tvůrcem a~přehledu pro něj, jak se prodává jeho dílo. Nebo přímo rozhraní pro tvorbu knihy online.\\
 
 \subsection{Trendy v informačních systémech}
 Svět informačníčh systému se stále rychle vyvíjí, dříve byl vyspělý informační systém \it{DOSový} program, který se připojil na server, mnohdy ani to ne, a~obsluha jej ovládala klávesnicí. Dnes jsou požadavky na informační systémy mnohem větší a~zákazníci ve většině případů vyžadují dostupnost kdekoliv na světě pomocí webového prohlížeče v~mobilu nebo~tabletu.\cite{trendsIS}\\
-
 Dalším trendem jsou sociální sítě jako Facebook,LinkedIn,Twitter apd,… informační systémy v~dnešní době zahrnují podpodu pro sociální síťe. Ale nejedná se pouze o~dnes velmi populární přihlašování bez nutnosti \it{"registrace"}, ale~např. zkoumání povědomí o~značce nebo komunikaci se zákazníky pomocí sociálních sítí a~realtime chatu.\cite{trendsIS}\\
 
 \subsection{Proces schvalování knih}\label{sec:schvalovani}
@@ -653,7 +651,6 @@ Event-loop je jeden ze způšobů zpracování programu. Oproti více zažitým 
 
 \subsection{Balíčkovací systém NPM}
 Zejména v~posledních letech začali být velmi populární balíčkovací systémy pro různé programovací jazyky nebo frameworky inspirované balíčkovacími systémy z~operačního systému Linux respektive z~různých distribucí OS Linux. Vše začal jazyk Ruby a~především framework Ruby On Rails se~systémem tzv. Gemů. PHP dostalo balíčkovací systémy composer (aplikační moduly) a~pecl (systémové moduly). Python má pip atd,... NodeJS obsahuje svůj vlastní balíčkovací systém NPM (Node Package Manager). Disponuje velmi jenoduchům ovládáním a~přináší programátorů řešení závislostí jejich aplikací a~knihoven napříč operačními systémy.\cite{NodeJS}\\
-
 Důležitým prvkem je konfigurační soubor \it{package.json}, obsahuje nejen informace o~závislostech programu, ale také třeba autora, verzi, popis, repozitář a~mnoho dalších údajů využívaných dalšími moduly aplikace.\\
 
 Ukázkový package.json
@@ -688,9 +685,7 @@ Ukázkový package.json
 }
 \end{Verbatim} 
     \end{codeframe}
-Ze souboru můžeme vyčíst, že jméno aplikace je "moje-aplikace", že se nachází ve verzi "0.0.1", jejími závislostmi jsou "coffee-script,express a mongoose", vývojovými závislostmi pak "angular a angular-ui-router", k běhu potřebuje nodejs ve verzi 0.8.0 a~vyšší. Modul browserify používá transformace: "coffeeify, brfs a envify" a~na závěr jsou dekplarované scripty.
-
-
+Ze souboru můžeme vyčíst, že jméno aplikace je "moje-aplikace", že se nachází ve verzi "0.0.1", jejími závislostmi jsou "coffee-script,express a mongoose", vývojovými závislostmi pak "angular a angular-ui-router", k běhu potřebuje nodejs ve verzi 0.8.0 a~vyšší. Modul browserify používá transformace: "coffeeify, brfs a envify" a~na závěr jsou dekplarované scripty.\\
 NPM také obsahuje interaktivný shell pro vytváření nových projektů, který vytvoří package.json za uživatele. Nově instalované moduly jsou při přidání přepínače \it{--save} nebo \it{--save-dev} přidávány také automaticky.\\
 
 Základní příkazy:
@@ -713,7 +708,6 @@ ExpressJS je webový framework inspirovaný webovým frameworkem Synatra napsan�
 \end{figure}
 
 Express je ve stylu Synatra designován jako velmi jednoduchý a~obsahuje tak velmi malé množství funkcí, které se rozšiřuje pluginy a~knihovnami. Express tak umí především zpracovávat routy (url cesty), html požádavky (POST,GET,PUT,PATCH,OPTION) a~tělo requestů. Umí také zpracovávat a~poskytovat statické soubory a cookies.\cite{expressjs}\\
-
 Ukázka velmi jednoduché express aplikace:
      \begin{codeframe} 
       \begin{Verbatim}{frame=single}
@@ -774,7 +768,6 @@ Schéma obsahuje teké definované typy objektů a~jejich validaci. Konkrétně 
 
 \subsection{HapiJS (HTTP API)}
 Pro nodeJS existuje opravdu obrovské množství nejrůznějších frameworků. Framework použitý pro tvorbu tohoto projektu se jmenuje \b{HapiJS} \href{http://spumko.github.io/}{http://spumko.github.io/}.\\
-
 Jednáse o~jednoduše konfigurovatelný framework s~podporou validací, cachování, autentizace atd. Zaměřuje se na psaní znovupoužitelného aplikačního kódu a~eliminuje zdlouhavé vytváření infrastruktury.\cite{hapiJS}\\
 
 Ukázka vytvoření základního serveru s~jednou routou "/":
@@ -934,11 +927,8 @@ Each incoming request passes through a pre-defined set of steps, along with opti
 \caption[Logo MongoDB]{Logo MongoDB}
 \end{figure}
 MongoDB je dokumentová NoSQL databáze s~dokumenty ve formatu json a~dynamickým schématem. Počátek jejího vývoje spadá do roku 2007 a~je vyvýjena společností 10gen, momentálně se nachází ve verzi 2.6.\\
-
 MongoDB funguje jako klasický databázový server, ke kterému se klienty připojují přes síť (obvykle na portu 27017) a~komunikují s~ním speciálním protokolem (ovšem na portu 28017 najdete jednoduché HTTP rozhraní). Součástí instalace je knihovna pro C++, jako součásti projektu jsou ale vyvíjeny a~podporovány i~knihovny pro Javu, Python, Ruby, PHP a~další jazyky.\\
-
 MongoDB navíc obsahuje mnoho pokročilích funkcí, jako je replikace databáze, balancování zátěže (load balancing), ukládání souborů (file storage), indexace a~další,... \\
-
 Základním rozhraním pro MongoDB je javascriptová konzole, kterou lze spustit příkazem \b{mongo}.\cite{abcLinuxuSerialMongo}
 
 Vkládání záznamů:
@@ -1054,7 +1044,6 @@ Překlad:
 \subsection{Struktura}
 Struktura kódu aplikace by měla mít nějaká pravidla, tak aby se v~kódu vyznam i~někdo jiný než autor samotný. Proto napříkal google poskytuje online doporučenou strukturu kódu pro aplikace napsané v~AngularJS. Online verze je dostupná na adrese: \href{https://google-styleguide.googlecode.com/svn/trunk/angularjs-google-style.html}{https://google-styleguide.googlecode.com/svn/trunk/angularjs-google-style.html}
 \it{Vzhledem k tomu,že se jedná o~obsáhlejší dokument nebude nijak komentován. Ale struktura aplikace je z~větší části ovlivněna právě tímto návrhem.}\\
-
 Co se týče struktury adresářové, existuje zde několik návrhů, které jsou určeny pro různě velké aplikace.\\
 
 Velmi jednoduchá aplikace v~AngularJS vypadá nějak takto:
@@ -1234,9 +1223,7 @@ Directivatu "loading" je možné "bindovat" na DOM element s~názvem "loading". 
 
 \subsection{Factory}
 Obecně lze říci, že service providery, jakým je i~factory, jsou k~tomu aby pro všechny controllery aplikace poskytovali stejné metody a~data, po dobu exsitence aplikace.\\
-
 Jedná se vždy o~objekt singleton, který je instancován jednou za život aplikace pomocí \it{\$injector} service.\cite{ngBOOK}\\
-
 Časté je použití factory jako helper pro komunikaci s~backendem aplikace, localStorage, cookieStorage apd,…\\
 
 Ukázka jednoduché factory pro generování náhodných čísel:
@@ -1283,7 +1270,6 @@ $scope.minutes = 1
 
 \subsection{Animace}
 Od verze 1.2 disponuje AngularJS přepracovanými animacemi v~samostatném modulu \it{angular-animate}. Definovat animace je díky tomuto modulu velmi jednoduché snadno pochopitelné a~velmi příjemné. K~animacím jsou používány běžné css animace, které jsou definovány pomocí css selectorů. \cite{angularAnimation}\\
-
 Většina AngularJS directivy jako \it{ngRepeat,ngShow, apd...} má vlastní hooky, které jsou spouštěny v určitých fázích cyklu directivy.\cite{ngBOOK}\\
 
 Ukázka ng-hide animace:
@@ -1310,7 +1296,6 @@ Ukázka ng-hide animace:
   \end{verbatim}
 \end{codeframe}
 tato animeca je určena pro directivu "ngShow". Z~kódu lze vyčíst, že~při přidaní a~odebrání elementu, repspektive při přidání třídy "ng-hide-add" a "ng-hide-remove", se~provede lineární animace trvající 0.5s a~po tuto dobu bude trvat přechod z~průhlednosti 1 do průhlednosti 0. Tak může být docíleno zmizení jakéhokoliv DOM elementu.\cite{ngBOOK}
-
 Další informace jak vytvářet vlastní animace je možné se dozvědět v~dokumentaci projektu: \href{https://docs.angularjs.org/guide/animations}{https://docs.angularjs.org/guide/animations}\\
 
 \section{\upc{LESS}}
@@ -1471,7 +1456,6 @@ Postupně jsou provedeny tyto kroky: \b{src} - vybere soubory a~vytvoří stream
 
 \section{\upc{Systém pro správu verzí git}}
 Projekt git byl založen v~roce 2005 Linusem Torvaldsem, původně pro vývoj jádra Linuxu, a~jsou do něj vloženy zkušenosti, které Linus získal při vedení rozsáhlého projektu Linuxového jádra.~\cite{MailingListVznikGITu}\\
-
 Git je zcela zdarma, open source, \b{distribuovaný systém pro správu verzí} navržený zvládnout vše od malých až~po~velmi rozsáhlé projekty s~rychlostí a~účinností. Každý klon Git je full-fledged (česky plně rozvinuté) úložiště s~kompletní historií a~veškerými schopnostmi sledování revizí a~nezávislostí na přístupu k~síti nebo centrálnímu serveru. Větvení (branching) a~slučování (merging) jsou rychlé a~snadné.~\cite{GITWEB} Velmi důležité je pak slovo distribuovaný, protože git neukládá každou změnu na centrální úložiště, ale~každý klon repozitáře obsahuje i~kompletní databázi změn projektu.
 
 \subsection{Použití git v bakalářské práci}
@@ -1649,7 +1633,6 @@ TODO:
 \part{Praktická část}
 \section{\upc{Funkcionalita}}
 Vzhledem k~modulárnosti a~škálovatelnosti aplikace lze na funkcionalitu nahlížet ze dvou pohledů.\\
-
 Prvním je pohled z~hlediska modulárnosti aplikace jako takové a~její škálovatelnosti a~druhým pohled z~hlediska uživateského.\\
 
 \subsection{Modulární aplikační funkcionalita}
@@ -1665,14 +1648,11 @@ V tomto pohledu, lze dělit funkcionalitu na Databázi \odkazNaKapitolu{sec:db},
 \end{figure}
 
 Databázovou funkcionalitu obstarává MongoDB server, který je sám o~sobě škálovatelný a~může běžet na několika serverech.\\
-
 Backend zajišťuje NodeJS aplikace, kterou lze dělit na části podle funkcionalit a~jednotlivé API mohou běžet na vlastních serverech. např. překlad TeX dokumentů může být uskutečňován na jiném serveru, fronend a~statické soubory mohou být distribuovány z~vlastního serveru, apd... Také zajišťuje integritu dat ukládaných do databáze a~restrikce uživatelského přístupu.\\
-
 Frontend je pak rozdělen do několik single-page aplikací aby se klientovi, který přijde na e-shop nestahoval zbytečně např. také editor pro tvorbu knih, nebo části aplikace, které by neměly být přístupné. Frontend používá framework AngularJS a~jeho kód je plně vykonáván na klientské stanici, tedy v~prohlížeči. Data se stahují pomocí asynchroních javascriptových requestů.\\
 
 \subsection{Uživatelská funkcionalita}
 Uživatelská funkcionalita spočívá pouze na frontendu. Ten zajištůje, že uživatel vidí a~kupuje knihy.\\
-
 Prakticky je frontend rozdělen to těchto single-page aplikací, kde každá znich poskytuje určitou funkcionalitu pro určité spektrum uživatelů.\\
 
 \begin{description}
@@ -2516,14 +2496,11 @@ stejný záznam jako předchozí sloužící pro získání IP adresy v~případ
 
 \subsection{Budoucí vývoj}
 MongoDB a~jeho absence schémat zajišťuje snadnější rozšiřitelnost aplikace, není třeba nijak zvláště řešit relace mezi kolekcemi a~už vůbec ne schéma, protože MongoDB nemá žádné schéma. Prakticky stačí změnit schéma v~mongoose, které je pouze aplikační a~MongoDB o~něm neví, a restartovat aplikace (nebo provést deploy).\\
-
 Z funkcionálního hlediska pak budoucí vývoj záleží na požadvavcích zákazníka, prakticky by pak další vývoj pravděpodobně zahrnoval rozšíření dat, které jsou zaznamenávány o~uživateli aby mu pak aplikace sama nabízela knihy a~informavala o~novinkách, které uživatel může pravděpodobně chtít, na základě procházených, koupených knih nebo i~informací o~procházení jiných webových stránek.\\
-
 Dalším bodem rozšíření je pak reklama, jak už reklama na položky portálu samotného tak i~placená inzerce dalších portálů a~služeb.\\
 
 \subsection{Zabezpečení}
 MongoDB má vlastní systém zabezpečení, který spočívá v~několika systémových rolích vlastním ACL a~omezení přístupu uživatelů k~databázím a~kolekcím. Ovšem aplikace reálně potřebuje přístup jak ke čtení tak k~zápisu do své databáze takže není na místě řešit jakékoliv složitější práva. Ta by mohla přijít vhod v~případě rozdělení aplikace na několik samostatných rozhraní, které by nepotřebovali např. přístup do některých kolekcí nebo zápis do nich. Takový případ by však nastal v~případě obrovských návštěvností a~jak už bylo řečeno penetrace rozhraní a~zařízení přistupujích do databáze.\\
-
 Dalším faktorem zabezpečení je pak zabezpečení serverové. V případě zabezpečení databází obecně, je na snadě zamezit maximálně přímé interakce uživatele a~databáze. Pokud není databáze sdílená a~nepotřebují přístup další externí uživatelé, což je případ spíše multihostingů, kde je většinou otevřený port přímo do databáze nebo je nabízeno rozhraní pro databázi (PHPMyAdmin pro MYSQl, pro MongoDB např. RockMongo). Proto je většinou přístupový bod do databáze možný pouze z~místní sítě aplikace tj. z~jejího aplikačního clusteru. V~tomto nanejvíš vhodném případě je pak přítup do databáze buď přímý přes databázový port nebo přes nějaké rozhraní pro databázi (RockMongo).V~takovém případě je pak třeba vytvořit v~místní síti aplikace server pro vzdálený přístup, vhodným řešením je např. OpenVPN nebo jiný SW pro vzdálený přístup nebo připojení počítače do vzdálené místní sítě v~Internetu.
 
 \subsubsection{Nastavení zabezpečení MongoDB}
@@ -2550,14 +2527,6 @@ O část aplikace na straně serveru se stará NodeJS server postavený framewor
 \subsubsection{/api/v1/order}
 \subsubsection{/api/v1/project}
 \subsubsection{/api/v1/page}
-\subsubsection{/api/v1/log}
-
-\subsection{Zabezpečení}
-\subsection{Přihlášení a soukromí uživatelů}
-\subsection{Ochrany proti útoků}
-\subsubsection{JSONP}
-\subsubsection{XSS}
-\subsubsection{CSRF}
 
 \section{\upc{Frontend}}\label{sec:frontend}
 \subsection{Komponenty}
@@ -2569,6 +2538,49 @@ O část aplikace na straně serveru se stará NodeJS server postavený framewor
 \subsubsection{Statistics (statistiky)}\label{sec:stats}
 \subsubsection{Admin (administrace)}\label{sec:admin}
 
+\section{\upc{Zabezpečení}}
+Mezi api a frontendem dochází http komunikaci, která je sama o~sobě náchylná na řadu útoků, které je třeba eliminovat již při návrhu aplikace. Klasické webové aplikace používají k~autentizaci uživatele cookies, které nejsou z~cela bezpečné. A~jsou třeba zabezpečit proti útoků jako je CSRF,XSS a další,...\\
+Návrh této aplikace obsahuje autentizaci pomoví JSON tokenu zvanou JWT\footnote{JWT-JSON web token}\cite{JWT}
+
+\subsection{JWT (JSON Web Token)}
+\b{Výhody:}\\
+ + JWT umožňuje cross domain API volání, nenastane tedy běžný cross domain problém, který nastává při cookies, jelikož cookies je vázaná k~doméně.\\
+ + JWT obsahuje všechny potřebné údaje pro identifikaci uživatele i~mezi různými servery.\\
+ + Je jednoduché realizovat klientské aplikace, jako nativní mobilní aplikace apd,...\cite{JWTTut}\\
+
+\b{Jak to funguje?}\\
+
+JWT token jsou tři base64 textové řetězce za sebou odělené tečkami.\\
+Ukázka JWT:
+\begin{codeframe}
+  \begin{verbatim}
+<header>.<payload>.<hash>
+eyJ0eX...JIUzI1NiJ9.eyJ1c...DU2Nzg5fQ.KG...1yB2xAwc_E
+    \end{verbatim}
+\end{codeframe}
+header a~payload jsou pouze jednoduché JSON objekty, které vypadají jako v~následující ukázce:\cite{JWTTut}
+\b{header:}
+\begin{codeframe}
+  \begin{verbatim}
+{ "typ": "JWT", "alg": "HMACSHA256" }
+    \end{verbatim}
+\end{codeframe}
+typ je vždy JWT a~alg je hash algoritmus použitý pro podepsání tokenu.\cite{JWTTut}
+
+\b{payload:} může býť jakýkoliv validní JSON objekt, ale vyžaduje některé standartizované klíče.
+\begin{codeframe}
+  \begin{verbatim}
+{ "user": "Franta", "exp": 123456789}
+    \end{verbatim}
+\end{codeframe}
+user je klíč definovaný a~exp je standartní UNIX time s~časem do kdy token platí. To že payload může být libovolný je skvélá věc, protože~můžeme přenášet jakékoliv informace o~uživateli. Důležité je vědět, že~payload není šifrovaný, jedná se pouze o~base64 zakódování, a nemůže být tedy použit k~přenášení citlivých informací.\\
+
+Celý token je pak sestaven tak, že se tečkou spojí base64 header a~payload, a přidá hash vygenerovaný konkrétním algoritmem.
+
+\subsubsection{Implementace backend (NODEJS)}
+
+
+\subsection{Přihlášení a soukromí uživatelů}
 
 \section{\upc{Gulp}}
 Gulp je používán pro sestavení frontendu aplikace, možné je sestavit aplikaci pro produkční a~vývojové účely. Gulp má pro to dva základní tasky \it{dev} a~\it{prod}. Gulp konkrétně sestavuje javascript pomocí browserify, vytváří sprity\footnote{sprite se požívá u~webu pro snížení počtu requestů při načítání. Spojuje obrázky do jednoho velkého obrázku, ze kterého jsou obrázky v~CSS referoncovány pomocí souřadnic a~velikosti }, optimalizuje obrázky, překládá LESS styly na CSS, převádí html soubory do angularové templateCache, takže se všechny views stáhnou spolu s~aplikací, a~obnovuje prohlížeč při změnách v~projektu.
@@ -2691,15 +2703,10 @@ Konečné řešení pro spojovaní souborů za účelem snížení počtu reques
 
 \section{\upc{Nasazení aplikace (server,cloud)}}
 V~dnešní době, kdy jsou moderní cloudové služby, které umožňují s~minimální počáteční investicí spustit projek prakticky jakékoliv velikosti. Je velmi dobré zvážit cloudové nasazení buď samostatné databáze nebo většinou kompletního projektu. Samozřejmě záleží především na finanční situaci provozovatele naší služby, jejím aktuálním stavu a~návštěvnosti.\\
-
 Cloud řeší především velké počáteční náklady na sprovoznění služby. Díky škálovatelnosti cloudových služeb nemusíme nijak zvlášť řešit jak velké množství prostředků bude potřeba. Není třeba kupovat fyzické stroje nebo pronajímat dedikované servery. Není třeba shánět zaměstnance, kteří by se starali o~chod serverů nebo platit za nějaké manage řešení.\\
-
 Cloud dává možnosti také rozdělení služeb a~jejich chod u~několika poskytovatelů ať už kvůli dalšímu šetření nákladů ( např. pokud bude MongoDB hosting levnější u~jiného posktovatele bude u~jednoho aplikační část a~u~druhého databázová část apd,… ) nebo dostupnosti z~globálního hlediska v~různých zemích nebo kontinentech.\\
-
 Díky cloudu můžeme také odhadnout náklady a~nároky koupi vlastní serverové infrastruktury, protože po dobu provozu v~cloudu, by bylo nasbíráno velké množství metrik a~následně odhadnuty nároky na vlastní řešení.\\
-
 Velmi vhodným je pak hybridní řešení, kdy je část aplikace provozována na vlastním serveru a~část v~cloudu. Často je v~cloudu provozována především databázová část. \\
-
 V případě koupi vlastní serverové infrastruktury, je třeba myslet na vysokou dostupnost služby tzv. HA\footnote{HA - High Avaibility - dva nebo více serverů jsou vzájemnými klony, a~v~případě výpadku jednoho, nebo více, serverů výpadek nepocítí koncový uživatel, maximálně může dojít ke zpomalení služby v~případě, že by výkon po výpadku byl nedostatečný.}. Nestačí tedy koupit jeden fyzický stroj a~něm provozovat službu. Je třeba koupit minimálně dva stroje a~pokud jeden vypadne zastoupí jej server druhý. Takové řešení má, ale své nevýhody, ta největší je především to, že druhý server běží a~spotřebovává energii naprosto zbytečně přičemž vyžaduje stejnou údržbu a~hrozí u~něj stejná pravděpodobnost HW chyby jako u~serveru, který je využíván. Proto je vhodné před tyto dva (nebo více serverů) umístít load balancer, který by rovnoměrně rozděloval zátěž mezi ně. Díky load balanceru, jsou servery rovnoměrně využívány a~v~případě výpadku převezmou automaticky všechny požadavky funkční servery.\\
 
 \subsection{MongoDB}
@@ -2842,7 +2849,6 @@ Kód vytvoří nodejs server na portu 8000 a~pro každé jádro procesoru vytvo�
 
 \subsubsection{Cloud}
 V oblasti cloudu je možností také nepočítaně. Mezi nejznámější služby patří např. průkopník v~této oblasti Heroku (\href{http://heroku.com}{http://heroku.com}), NodeJitsu \href{https://www.nodejitsu.com/}{https://www.nodejitsu.com/} nebo relativně nová služba od společnosti Red Hat Openshift \href{https://www.openshift.com/}{https://www.openshift.com/}. Všechny služby jsou velice jednoduché na používání nabízejí jak webové rozhraní pro vytváření aplikací tak jednoduchý deployment pomocí příkazové řádky. Navíc všechny poskytují zároveň MongoDB hosting takže není třeba při startu aplikace využívat externí cloudové služby pro databázi.\\
-
 Vzhledem k~tomu, že je deploy pro všechny cloudové služby prakticky stejný bude uveden příklad pro OpenShift.\\
 
 Pro instalaci a~využití Openshiftu je třeba mít nainstalováno ruby, pak stačí jednoduše nainstalovat gem rhc.
@@ -2907,6 +2913,8 @@ webovou adresu aplikace je pak možné získat po přihlášení na webu openshi
 \bibitem{typeScript} http://www.typescriptlang.org/Tutorial
 \bibitem{BASHen}http://www.nodejs.cz/co-je-event-driven-architektura/. [e-kniha]
 \bibitem{sharding}http://docs.mongodb.org/manual/core/sharding/.
+\bibitem{JWT} http://self-issued.info/docs/draft-ietf-oauth-json-web-token.html
+\bibitem{JWTTut} http://mikehadlow.blogspot.cz/2014/04/json-web-tokens-owin-and-angularjs.html
 \bibitem{http2} http://http2.github.io/http2-spec/index.html\#StreamsLayer
 \bibitem{MailingListVznikGITu}TORVALDS, Linus.{\it{ LKML.ORG - the Linux Kernel Mailing List Archive}} [online]. 2005-04-07 [cit. 2011-05-26]. Linus Torvalds: Re: Kernel SCM saga. Dostupné z~WWW: \href{http://lkml.org/lkml/2005/4/8/9}{http://lkml.org/lkml/2005/4/8/9}.
 \bibitem{GITWEB}CHACON, Scott. {\it{ Git}} [online]. 2005 [cit. 2011-05-26]. Git - Fast Version Control System. Dostupné z~WWW: \href{http://git-scm}{http://git-scm}
